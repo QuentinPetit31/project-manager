@@ -1,9 +1,5 @@
-// @use '@angular/material' as mat;
-
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-// @include mat.core();
-
-// $my-palette: mat.$indigo-palette;
+@import 'theme.scss';
