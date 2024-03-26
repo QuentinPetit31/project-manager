@@ -5,15 +5,28 @@
     <mat-label>E mail</mat-label>
     <input formControlName="email" matInput placeholder="Placeholder" />
     <mat-icon matSuffix>mail</mat-icon>
-    <!-- <mat-hint>Hint</mat-hint> -->
+    <!-- display mat hint with error message if form.controls.email.errors -->
+    <mat-hint *ngIf="form.controls.email.errors" class="text-red-500">
+      error
+    </mat-hint>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Password</mat-label>
     <input formControlName="password" matInput placeholder="Placeholder" />
     <mat-icon matSuffix>lock</mat-icon>
-    <!-- <mat-hint>Hint</mat-hint> -->
+    <mat-hint *ngIf="form.controls.password.errors" class="text-red-500">
+      error {{ form.controls.password.errors | json }}
+    </mat-hint>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit">Login</button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!form.valid">
+    Login
+  </button>
+
+  <p *ngIf="asError" class="text-red-500">email or password unknow</p>
 </form>

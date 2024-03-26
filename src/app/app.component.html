@@ -1,7 +1,10 @@
-<header class="w-full bg-lime-500 h-12">
+<header class="w-full flex items-center justify-center bg-lime-500 h-12">
   <a routerLink="" mat-button>Project manager</a>
-  <a routerLink="/login" mat-button>Login</a>
   <a routerLink="/exercise" mat-button>Exercise</a>
+  <!-- if logged, display user mail  -->
+  <!-- if not logged display login button -->
+  <a routerLink="/login" mat-button *ngIf="!user">Login</a>
+  <p class="text-lg" *ngIf="user">Bonjour {{ user.name }}</p>
 </header>
 
 <div class="m-8">

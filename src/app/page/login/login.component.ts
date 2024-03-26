@@ -10,11 +10,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { User, UserService } from '../../service/user.service';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
+    CommonModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -26,21 +29,45 @@ import { User, UserService } from '../../service/user.service';
 })
 export class LoginComponent {
   form = new FormGroup({
-    email: new FormControl<string>('', Validators.required),
-    password: new FormControl<string>('', Validators.required),
+    email: new FormControl<string>('quentin@mail.com', [
+      Validators.required,
+      Validators.email,
+    ]),
+    // email: new FormControl<string>('', [Validators.required, Validators.email]),
+    password: new FormControl<string>('123azerty', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
+    // password: new FormControl<string>('', [
+    //   Validators.required,
+    //   Validators.minLength(8),
+    // ]),
   });
-  constructor(private userService: UserService) {
-    //appeller user service
-    userService;
-  }
+  asError = false;
+
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   login() {
-    const formValue = this.form.getRawValue() as User;
-    console.log('login = ', formValue);
+    // if form valide
+    if (this.form.valid) {
+      // récupère la valeur du form
+      const formValue = this.form.getRawValue() as User;
+      console.log('formValue = ', formValue);
 
-    // this.userService.login())
-    // Appel de la méthode login du service UserService avec les informations du formulaire
-    const login = this.userService.login(formValue);
-    console.log('login', login);
+      // Appel de la méthode login du service UserService avec les informations du formulaire
+      const loginSuccess = this.userService.login(formValue);
+      console.log('loginSuccess', loginSuccess);
+      // si ok redirection homepage
+      if (loginSuccess) {
+        this.router.navigate(['']);
+        // <a routerLink="/login" mat-button>this.userService.login(formValue)</a>
+      } else {
+        //si erreur message sous bouton
+        this.asError = true;
+      }
+    }
   }
 }

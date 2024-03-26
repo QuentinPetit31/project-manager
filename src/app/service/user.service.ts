@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export interface User {
+  name?: string;
   email: string;
   password: string;
 }
@@ -10,8 +11,8 @@ export interface User {
 })
 export class UserService {
   private users: User[] = [
-    { email: 'quentin@mail.com', password: '123' },
-    { email: 'thomas@mail.com', password: '123' },
+    { name: 'Quentin', email: 'quentin@mail.com', password: '123azerty' },
+    { name: 'Thomas', email: 'thomas@mail.com', password: '123azerty' },
   ];
   private user: User | null = null;
 
