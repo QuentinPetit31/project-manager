@@ -9,11 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-
-interface Login {
-  mail: string;
-  password: string;
-}
+import { User, UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -33,9 +29,18 @@ export class LoginComponent {
     email: new FormControl<string>('', Validators.required),
     password: new FormControl<string>('', Validators.required),
   });
+  constructor(private userService: UserService) {
+    //appeller user service
+    userService;
+  }
 
   login() {
-    const formValue = this.form.getRawValue();
+    const formValue = this.form.getRawValue() as User;
     console.log('login = ', formValue);
+
+    // this.userService.login())
+    // Appel de la méthode login du service UserService avec les informations du formulaire
+    const login = this.userService.login(formValue);
+    console.log('login', login);
   }
 }
