@@ -1,1 +1,57 @@
 <p>enroll works!</p>
+
+<form
+  [formGroup]="form"
+  class="flex flex-col space-y-4"
+  (ngSubmit)="register()">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input formControlName="name" matInput placeholder="Placeholder" />
+    <mat-icon matSuffix>person_pin</mat-icon>
+    <!-- min two charac-->
+    <mat-hint *ngIf="form.controls.name.errors" class="text-red-500">
+      error
+    </mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>E mail</mat-label>
+    <input formControlName="email" matInput placeholder="Placeholder" />
+    <mat-icon matSuffix>mail</mat-icon>
+    <!-- display mat hint with error message if form.controls.email.errors -->
+    <mat-hint *ngIf="form.controls.email.errors" class="text-red-500">
+      error
+    </mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input formControlName="password" matInput placeholder="Placeholder" />
+    <mat-icon matSuffix>lock</mat-icon>
+    <mat-hint *ngIf="form.controls.password.errors" class="text-red-500">
+      error {{ form.controls.password.errors | json }}
+    </mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Confirm your password</mat-label>
+    <input
+      formControlName="confirmPassword"
+      matInput
+      placeholder="Placeholder" />
+    <mat-icon matSuffix>lock</mat-icon>
+    <mat-hint *ngIf="form.controls.confirmPassword.errors" class="text-red-500">
+      error {{ form.controls.confirmPassword.errors | json }}
+    </mat-hint>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!form.valid">
+    Register
+  </button>
+
+  <p *ngIf="asError" class="text-red-500">Mail already used</p>
+  <p *ngIf="passwordError" class="text-red-500">Passwords are differents</p>
+</form>
