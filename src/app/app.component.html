@@ -1,6 +1,7 @@
-<header class="w-full flex items-center justify-center bg-emerald-200 h-12">
-  <a routerLink="" mat-button class="m-2">Project manager</a>
+<header class="w-full flex items-center justify-center bg-slate-200 h-12">
+  <a routerLink="" mat-button class="m-2">Home</a>
   <a routerLink="/exercise" mat-button class="m-3">Exercise</a>
+  <a routerLink="/project" mat-button class="m-3">Project</a>
   <a routerLink="/enroll" mat-button *ngIf="!user" class="m-3">Registration</a>
   <!-- if logged, display user mail  -->
   <!-- if not logged display login button -->
@@ -8,8 +9,8 @@
   <p class="text-lg" *ngIf="user">Bonjour {{ user.name }}</p>
 </header>
 
-<div class="m-8">
+<div class="mx-auto container my-8">
   <router-outlet />
 </div>
 
-<footer class="w-full bg-emerald-200 h-12">Footer</footer>
+<footer class="w-full bg-slate-200 h-12">Footer</footer>

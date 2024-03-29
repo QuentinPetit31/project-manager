@@ -1,1 +1,39 @@
-<p>project works!</p>
+<h1 class="text-center mb-4">Project</h1>
+
+<table mat-table [dataSource]="projects">
+  <!-- Project Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Project Name</th>
+    <td mat-cell *matCellDef="let project">{{ project.name }}</td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let project">{{ project.description }}</td>
+  </ng-container>
+
+  <!-- Start Date Column -->
+  <ng-container matColumnDef="startDate">
+    <th mat-header-cell *matHeaderCellDef>Start Date</th>
+    <td mat-cell *matCellDef="let project">{{ project.startDate }}</td>
+  </ng-container>
+
+  <!-- End Date Column -->
+  <ng-container matColumnDef="endDate">
+    <th mat-header-cell *matHeaderCellDef>End Date</th>
+    <td mat-cell *matCellDef="let project">{{ project.endDate }}</td>
+  </ng-container>
+
+  <!-- Assigned To Column -->
+  <ng-container matColumnDef="personnes">
+    <th mat-header-cell *matHeaderCellDef>Assigned To</th>
+    <td mat-cell *matCellDef="let project">
+      {{ project.personnes.join(', ') }}
+    </td>
+  </ng-container>
+
+  <!-- Define columns -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

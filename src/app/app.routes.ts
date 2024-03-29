@@ -7,8 +7,8 @@ import { EnrollComponent } from './page/enroll/enroll.component';
 import { ProjectComponent } from './page/project/project.component';
 
 export const routes: Routes = [
-  { path: 'project', component: ProjectComponent, canActivate: [AuthGuard] },
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'project', component: ProjectComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'enroll', component: EnrollComponent },
   { path: 'exercise', component: ExerciceComponent },
