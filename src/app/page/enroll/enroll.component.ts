@@ -25,7 +25,6 @@ import { Router } from '@angular/router';
     ReactiveFormsModule,
   ],
   templateUrl: './enroll.component.html',
-  styleUrl: './enroll.component.scss',
 })
 export class EnrollComponent {
   form = new FormGroup({

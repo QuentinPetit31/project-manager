@@ -17,7 +17,6 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'project-manager';
