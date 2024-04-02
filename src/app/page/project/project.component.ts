@@ -8,7 +8,6 @@ import { MatTableModule } from '@angular/material/table';
   standalone: true,
   imports: [CommonModule, MatTableModule],
   templateUrl: './project.component.html',
-  styleUrl: './project.component.scss',
 })
 export class ProjectComponent {
   displayedColumns: string[] = [
