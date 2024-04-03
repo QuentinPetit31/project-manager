@@ -1,6 +1,9 @@
 <h1>Login</h1>
-
-<form [formGroup]="form" class="flex flex-col space-y-4" (ngSubmit)="login()">
+<!-- Contenu de votre login -->
+<form
+  [formGroup]="form"
+  class="Lg:w-1/2 mx-auto w-1/2 flex flex-col space-y-4"
+  (ngSubmit)="login()">
   <mat-form-field>
     <mat-label>E mail</mat-label>
     <input formControlName="email" matInput placeholder="Placeholder" />

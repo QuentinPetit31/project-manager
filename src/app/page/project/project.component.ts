@@ -22,4 +22,8 @@ export class ProjectComponent {
     return this.projectService.getAllProjects();
   }
   constructor(private projectService: ProjectService) {}
+
+  showAlert(projectName: string) {
+    window.alert('Selected Project: ' + projectName);
+  }
 }

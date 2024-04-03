@@ -1,4 +1,4 @@
-<h1 class="text-center mb-4">Project</h1>
+<h1>Project</h1>
 
 <table mat-table [dataSource]="projects">
   <!-- Project Name Column -->
@@ -35,5 +35,8 @@
 
   <!-- Define columns -->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    (click)="showAlert(row.name)"></tr>
 </table>
