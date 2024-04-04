@@ -1,8 +1,10 @@
 <h1>Detail Project</h1>
+<div *ngIf="!project">Project unknow</div>
+<div *ngIf="project">
+  <h2>Project: {{ project.name }}</h2>
 
-<!-- <h1>Project: {{ name }}</h1>
-
-<p>Start date: {{ startDate }}</p>
-<p>End date: {{ endDate }}</p>
-<p>Descritption: {{ description }}</p>
-<p>People: {{ personnes }}</p> -->
+  <p>Start date: {{ project.startDate }}</p>
+  <p>End date: {{ project.endDate }}</p>
+  <p>Descritption: {{ project.description }}</p>
+  <p>People: {{ project.personnes }}</p>
+</div>

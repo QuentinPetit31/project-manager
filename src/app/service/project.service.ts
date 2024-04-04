@@ -37,8 +37,20 @@ export class ProjectService {
   ];
 
   constructor() {}
+
   getAllProjects(): Project[] {
     console.log(this.projects);
     return this.projects;
+  }
+
+  getProjectByName(name: string): Project | null {
+    let projectFind = null;
+    for (let i = 0; i < this.projects.length; i++) {
+      if (this.projects[i].name === name) {
+        projectFind = this.projects[i];
+      }
+    }
+
+    return projectFind;
   }
 }

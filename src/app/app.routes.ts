@@ -9,19 +9,15 @@ import { DetailProjectComponent } from './page/detail-project/detail-project.com
 import { CreateUpdateProjectComponent } from './page/create-update-project/create-update-project.component';
 
 export const routes: Routes = [
-  {
-    path: 'project/:name',
-    component: DetailProjectComponent,
-  },
   { path: '', component: HomeComponent },
-  { path: 'project', component: ProjectComponent },
   { path: 'login', component: LoginComponent },
   { path: 'enroll', component: EnrollComponent },
   { path: 'exercise', component: ExerciceComponent },
-  {
-    path: 'project/create creation',
-    component: CreateUpdateProjectComponent,
-  },
+  { path: 'project', component: ProjectComponent },
+  { path: 'project/create', component: CreateUpdateProjectComponent },
+  { path: 'project/:name', component: DetailProjectComponent },
+  { path: 'project/:name/update', component: CreateUpdateProjectComponent },
+
   { path: '**', redirectTo: '' },
 ];
 

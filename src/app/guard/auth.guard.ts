@@ -45,5 +45,4 @@ export const AuthGuard = () => {
 
 // create composant create update-project le brancher a la route
 // formulaire
-// arriver a l'afficher s'inspirer du enroll
-// dans route ** a la fin
+// arriver a l'afficher s'inspirer du enroll dans route ** a la fin
