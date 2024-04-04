@@ -43,6 +43,7 @@ export const AuthGuard = () => {
 // j'aimerasi faire en sorte de pouvoir cliquer sur une ligne de mon tableau pour
 // que ça me redirige vers detail-project qui correspond à cette page
 
-// create composant create updrate project le brancher a la route
+// create composant create update-project le brancher a la route
 // formulaire
-// arriver a l'afficher s'inspirer du enroll dans route ** a la fin
+// arriver a l'afficher s'inspirer du enroll
+// dans route ** a la fin
