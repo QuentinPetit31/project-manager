@@ -39,6 +39,9 @@
     mat-row
     *matRowDef="let row; columns: displayedColumns"
     (click)="showAlert(row.name)"></tr>
+  <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns" 
+    [routerLink]="['/detail-project', row.name]"></tr> -->
+
   <!-- l'alerte doit rediriger vers la page detail-project (clic on row -> je veut que ça 
     redirige via le ts)-->
 </table>
