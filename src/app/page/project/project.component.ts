@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { ProjectService } from '../../service/project.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-project',
   standalone: true,
-  imports: [CommonModule, MatTableModule],
+  imports: [CommonModule, RouterModule, MatTableModule, MatButtonModule],
   templateUrl: './project.component.html',
 })
 export class ProjectComponent {
@@ -21,9 +23,6 @@ export class ProjectComponent {
   get projects() {
     return this.projectService.getAllProjects();
   }
-  constructor(private projectService: ProjectService) {}
 
-  showAlert(projectName: string) {
-    window.alert('Selected Project: ' + projectName);
-  }
+  constructor(private projectService: ProjectService) {}
 }

@@ -1,29 +1,38 @@
 <h1>Detail Project</h1>
+<a mat-raised-button color="primary" [routerLink]="['/project']"
+  >Back to project-list</a
+>
+
 <h2
   *ngIf="!project"
-  class="lg:w-1/2 mx-auto flex flex-col space-y-4 sm text-align center">
+  class="lg:w-1/2 mx-auto flex flex-col space-y-4 text-center">
   Sorry, we couldn't find the project you were looking for. It may not exist.
   Please try again.
 </h2>
-<div *ngIf="project" class="lg:w-1/2 mx-auto flex flex-col space-y-4 sm">
+<div *ngIf="project" class="lg:w-1/2 mx-auto flex flex-col space-y-4">
   <h2>Project: {{ project.name }}</h2>
+  <div class="grid gap-5 grid-flow-row lg:grid-flow-col">
+    <h2 class="inline-block">Start date:</h2>
+    <p class="inline-block">{{ project.startDate }}</p>
+    <h2>End date:</h2>
+    <p class="inline-block">{{ project.endDate }}</p>
+  </div>
 
-  <h2 class="inline">Start date:</h2>
-  <p class="inline">{{ project.startDate }}</p>
-  <h2>End date:</h2>
-  <p class="inline">{{ project.endDate }}</p>
   <h2>Descritption:</h2>
   <p>{{ project.description }}</p>
   <h2>People:</h2>
-  <ul>
-    <li *ngFor="let person of project.personnes">- {{ person }}</li>
+  <ul class="list-disc ml-12">
+    <li *ngFor="let person of project.personnes">
+      {{ person }}
+    </li>
   </ul>
-  <!-- <button
-    mat-raised-button
-    color="primary"
-    type="submit"
-    [Update]="Update"></button>
-  <button mat-raised-button color="primary" type="submit" [Delete]="Delete">
-    Register
-  </button> -->
+  <div *ngIf="project" class="grid gap-5 grid-flow-row lg:grid-flow-col">
+    <a
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/project', project.name, 'update']"
+      >Update</a
+    >
+    <button mat-raised-button color="primary">Delete</button>
+  </div>
 </div>

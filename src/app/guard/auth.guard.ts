@@ -12,6 +12,7 @@ export const AuthGuard = () => {
   }
   return true;
 };
+
 // se servir de ça pour naviguer vers une route
 // router.navigateByUrl('/toto');
 // creer composant détail-proj après brancher a une route projet/:name

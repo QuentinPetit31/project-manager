@@ -38,10 +38,11 @@
   <tr
     mat-row
     *matRowDef="let row; columns: displayedColumns"
-    (click)="showAlert(row.name)"></tr>
-  <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns" 
-    [routerLink]="['/detail-project', row.name]"></tr> -->
-
-  <!-- l'alerte doit rediriger vers la page detail-project (clic on row -> je veut que ça 
-    redirige via le ts)-->
+    [routerLink]="['/project', row.name]"
+    class="cursor-pointer hover:bg-gray-200"></tr>
 </table>
+<div class="grid grid-flow-row w-1/6 mx-auto my-12 lg:grid-flow-col">
+  <a mat-raised-button color="primary" [routerLink]="['/project/create']"
+    >Add a project</a
+  >
+</div>
