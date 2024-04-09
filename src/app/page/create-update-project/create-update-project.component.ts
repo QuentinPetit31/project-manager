@@ -12,6 +12,7 @@ import {
 import { Project } from '../project/project';
 import { CommonModule } from '@angular/common';
 import { ProjectService } from '../../service/project.service';
+import { Router } from '@angular/router';
 
 /**
  * @title Basic Inputs
@@ -54,20 +55,14 @@ export class CreateUpdateProjectComponent {
       Validators.minLength(2),
     ]),
   });
-  asError = false;
+  projectNameAlreadyUsed = false;
   passwordError = false;
 
   // import porject service
-  constructor(private projectService: ProjectService) {}
-
-  // ng on init pour récuperer le param project
-  // (nom du projet ciblé dans l'url comme dans détail)
-  // regarder si projet correspond (getprojetbyname())
-  // scénario d'erreur, pas de projet -> ramener vers parge tab projet
-  // si il existe, préremplir champ du formulaire avec les valeurs du projet
-  // store initial title - créer variable update title pour pouvoir valider
-  // une modification faire un for chercher dans un tableau[i].length
-  // trouver le bon, le modifier
+  constructor(
+    private projectService: ProjectService,
+    private router: Router
+  ) {}
 
   createProject() {
     console.log('-------------');
@@ -87,11 +82,23 @@ export class CreateUpdateProjectComponent {
       const newProjectSucces = this.projectService.createProject(project);
       if (newProjectSucces) {
         console.log('Le projet a été ajouté avec succès.');
+        this.router.navigate(['/project']);
       } else {
         console.log(
           "Échec de l'ajout du projet. Le nom du projet est déjà utilisé."
         );
+        //afficher erreur en rouge sous le bouton
+        //si erreur message sous bouton
+        this.projectNameAlreadyUsed = true;
       }
     }
   }
 }
+// ng on init pour récuperer le param project
+// (nom du projet ciblé dans l'url comme dans détail)
+// regarder si projet correspond (getprojetbyname())
+// scénario d'erreur, pas de projet -> ramener vers parge tab projet
+// si il existe, préremplir champ du formulaire avec les valeurs du projet
+// store initial title - créer variable update title pour pouvoir valider
+// une modification faire un for chercher dans un tableau[i].length
+// trouver le bon, le modifier
