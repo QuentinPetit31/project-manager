@@ -67,7 +67,7 @@ export class UserService {
   }
 
   register(user: User): boolean {
-    console.log('Appel serviceRegister');
+    console.log('Appelle serviceRegister');
     //Regarder que le mail est unique et que le mdp fait au moins 8 charactères
     //name et mdp if
     if (user.name?.length < 2 && user.password.length < 8) {

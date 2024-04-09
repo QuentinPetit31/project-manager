@@ -43,15 +43,16 @@
       error {{ form.controls.confirmPassword.errors | json }}
     </mat-hint>
   </mat-form-field>
-
-  <button
-    mat-raised-button
-    color="primary"
-    type="submit"
-    [disabled]="!form.valid">
-    Register
-  </button>
-
+  <div class="lg:col-span-2 grid justify-center">
+    <button
+      class="w-80"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!form.valid">
+      Register
+    </button>
+  </div>
   <p *ngIf="asError" class="text-red-500">Mail already used</p>
   <p *ngIf="passwordError" class="text-red-500">Passwords are differents</p>
 </form>

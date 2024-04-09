@@ -9,37 +9,14 @@ import { DetailProjectComponent } from './page/detail-project/detail-project.com
 import { CreateUpdateProjectComponent } from './page/create-update-project/create-update-project.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent,
-  },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'enroll', component: EnrollComponent },
-  { path: 'exercise', component: ExerciceComponent },
-  { path: 'project', component: ProjectComponent },
-  { path: 'project/create', component: CreateUpdateProjectComponent },
-  { path: 'project/:name', component: DetailProjectComponent },
-  { path: 'project/:name/update', component: CreateUpdateProjectComponent },
-  { path: 'detail-project/:nomDuParam', component: DetailProjectComponent },
+  { path: 'exercise', component: ExerciceComponent, canActivate: [AuthGuard] },
+  { path: 'project', component: ProjectComponent, canActivate: [AuthGuard] },
+  { path: 'project/create', component: CreateUpdateProjectComponent }, // , canActivate: [AuthGuard]
+  { path: 'project/:name', component: DetailProjectComponent }, // , canActivate: [AuthGuard]
+  { path: 'project/:name/update', component: CreateUpdateProjectComponent }, // , canActivate: [AuthGuard]
 
   { path: '**', redirectTo: '' },
 ];
-
-// export const routes: Routes = [
-//   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-//   { path: 'project', component: ProjectComponent, canActivate: [AuthGuard] },
-//   { path: 'login', component: LoginComponent },
-//   { path: 'enroll', component: EnrollComponent },
-//   { path: 'exercise', component: ExerciceComponent },
-//   { path: '**', redirectTo: '' },
-//   {
-//     path: 'project/:name',
-//     component: DetailProjectComponent,
-//     canActivate: [AuthGuard],
-//   },
-//   {
-//     path: 'updateProject',
-//     component: UpdateProjectComponent,
-//     canActivate: [AuthGuard],
-//   },
-// ];

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatInputModule } from '@angular/material/input';
 import { CreateUpdateProjectComponent } from './create-update-project.component';
 
 describe('CreateUpdateProjectComponent', () => {
@@ -8,10 +8,9 @@ describe('CreateUpdateProjectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateUpdateProjectComponent]
-    })
-    .compileComponents();
-    
+      imports: [CreateUpdateProjectComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CreateUpdateProjectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

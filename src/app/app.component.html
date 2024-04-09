@@ -1,4 +1,4 @@
-<header class="bg-slate-200 h-10 flex justify-center">
+<header class="bg-slate-200 h-14 flex justify-center items-center">
   <a routerLink="" mat-button>Home</a>
   <a routerLink="/exercise" mat-button>Exercise</a>
   <a routerLink="/project" mat-button>Project</a>
@@ -6,11 +6,13 @@
   <!-- if logged, display user mail  -->
   <!-- if not logged display login button -->
   <a routerLink="/login" mat-button *ngIf="!user">Login</a>
-  <p class="text-lg" *ngIf="user">Bonjour {{ user.name }}</p>
+  <p class="text-lg" *ngIf="user">Hello {{ user.name }}!</p>
 </header>
-<div class="container my-8">
+<div class="mx-auto container my-8">
   <div class="mx-4">
     <router-outlet />
   </div>
 </div>
-<footer class="w-full bg-slate-200 h-10">Footer</footer>
+<footer class="w-full bg-slate-200 h-14 justify-center items-center bottom-0">
+  Footer
+</footer>

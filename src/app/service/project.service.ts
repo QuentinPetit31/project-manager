@@ -64,4 +64,27 @@ export class ProjectService {
 
     return projectFind;
   }
+  createProject(project: Project) {
+    let projectNameAlreadyUsed = false;
+
+    console.log('Appelle createProject');
+    for (let i = 0; i < this.projects.length; i++) {
+      if (this.projects[i].name === project.name) {
+        projectNameAlreadyUsed = true;
+      }
+    }
+    if (projectNameAlreadyUsed) {
+      console.log('Le nom du projet est déjà utilisé');
+      return false;
+    } else {
+      // ajouter un project à la liste des projects
+      this.projects.push(project);
+      console.log('inscription finalisée');
+      // verifier ce qu'il y a dans le tableau après inscription (sans renouveler la page)
+      console.log(this.projects);
+      return true;
+    }
+  }
 }
+// faire push
+// this.projectService.createProject a appeler

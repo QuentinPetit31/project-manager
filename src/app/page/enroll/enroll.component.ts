@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { User, UserService } from '../../service/user.service';
+import { UserService } from '../../service/user.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -37,15 +37,11 @@ export class EnrollComponent {
       Validators.required,
       Validators.email,
     ]),
-    // email: new FormControl<string>('', [Validators.required, Validators.email]),
     password: new FormControl<string>('123azerty', [
       Validators.required,
       Validators.minLength(8),
     ]),
-    // password: new FormControl<string>('', [
-    //   Validators.required,
-    //   Validators.minLength(8),
-    // ]),
+
     confirmPassword: new FormControl<string>('123azerty', [
       Validators.required,
       Validators.minLength(8),
