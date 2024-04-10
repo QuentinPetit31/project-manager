@@ -1,56 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Project } from '../page/project/project';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectService {
-  projects: Project[] = [
-    {
-      name: 'toto',
-      description: 'description',
-      startDate: '25/08/2000',
-      endDate: '27/08/2000',
-      personnes: ['toto', 'tata', 'titi'],
-    },
-    {
-      name: 'Basic Computer Skills Workshop',
-      description:
-        'Host a series of workshops to teach basic computer skills such as using email, browsing the internet, and using word processing software. Sarah will lead the workshops, with support from David and Emily.',
-      startDate: '25/02/2024',
-      endDate: '27/02/2024',
-      personnes: ['Sarah', 'David', 'Emily'],
-    },
-    {
-      name: 'Tech Support for Seniors',
-      description:
-        'Provide personalized tech support sessions for seniors to help them navigate their computers, smartphones, and tablets. James will coordinate the sessions, while Lisa and Michael will assist the seniors.',
-      startDate: '15/01/2011',
-      endDate: '17/01/2011',
-      personnes: ['James', 'Lisa', 'Michael'],
-    },
-    {
-      name: 'Coding Club for Kids',
-      description:
-        'Start a coding club for kids to learn programming basics in a fun and interactive way. Emma will lead the club, with help from Ethan and Olivia.',
-      startDate: '25/08/2020',
-      endDate: '27/08/2020',
-      personnes: ['Michael', 'David', 'Emma'],
-    },
-    {
-      name: 'Website Building Workshop',
-      description:
-        'Conduct a workshop to teach participants how to build their own websites using user-friendly platforms. Thomas will lead the workshop, with support from Rachel and Benjamin.',
-      startDate: '02/09/2023',
-      endDate: '29/08/2023',
-      personnes: ['Thomas', 'David', 'Emma', 'Quentin'],
-    },
-  ];
+  private projects: Project[] = [];
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {
+    this.refreshProjects();
+  }
+
+  refreshProjects(): void {
+    console.log('refreshProjects');
+
+    this.httpClient
+      .get<Project[]>('http://localhost:3000/project')
+      .subscribe(projects => {
+        console.log('refreshProjects projects  =>', projects);
+        this.projects = projects;
+      });
+  }
 
   getAllProjects(): Project[] {
-    console.log(this.projects);
+    console.log('getAllProjects', this.projects);
     return this.projects;
   }
 
@@ -64,6 +38,7 @@ export class ProjectService {
 
     return projectFind;
   }
+
   createProject(project: Project) {
     let projectNameAlreadyUsed = false;
 
@@ -78,13 +53,21 @@ export class ProjectService {
       return false;
     } else {
       // ajouter un project à la liste des projects
-      this.projects.push(project);
-      console.log('inscription finalisée');
-      // verifier ce qu'il y a dans le tableau après inscription (sans renouveler la page)
-      console.log(this.projects);
+      // this.projects.push(project);
+      this.httpClient
+        .post('http://localhost:3000/project/create', project)
+        .subscribe(sucess => {
+          if (sucess) {
+            console.log('inscription finalisée');
+            // verifier ce qu'il y a dans le tableau après inscription (sans renouveler la page)
+            this.refreshProjects();
+            return true;
+          }
+          return false;
+        });
+
+      this.refreshProjects();
       return true;
     }
   }
 }
-// faire push
-// this.projectService.createProject a appeler

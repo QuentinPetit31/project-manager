@@ -38,7 +38,7 @@ export class CreateUpdateProjectComponent {
       Validators.required,
       Validators.minLength(2),
     ]),
-    personnes: new FormControl<string>('contributor, test , anna', [
+    personnes: new FormControl<string>('contributor, test , Anna', [
       Validators.required,
       Validators.minLength(2),
     ]),

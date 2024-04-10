@@ -11,7 +11,7 @@ import {
 } from '@angular/forms';
 import { User, UserService } from '../../service/user.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +23,7 @@ import { Router } from '@angular/router';
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
+    RouterModule,
   ],
   templateUrl: './login.component.html',
 })
@@ -68,5 +69,8 @@ export class LoginComponent {
         this.asError = true;
       }
     }
+  }
+  redirectToEnrollPage() {
+    this.router.navigate(['/enroll']);
   }
 }

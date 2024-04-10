@@ -23,13 +23,18 @@
     </mat-hint>
   </mat-form-field>
 
-  <button
-    mat-raised-button
-    color="primary"
-    type="submit"
-    [disabled]="!form.valid">
-    Login
-  </button>
+  <div class="grid lg:grid-cols-2 gap-6 mt-4">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!form.valid">
+      Login
+    </button>
 
-  <p *ngIf="asError" class="text-red-500">email or password unknow</p>
+    <p *ngIf="asError" class="text-red-500">email or password unknow</p>
+    <a mat-raised-button color="primary" [routerLink]="['/enroll']">
+      Create an account
+    </a>
+  </div>
 </form>
