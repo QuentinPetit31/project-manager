@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { User, UserService } from './service/user.service';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
     RouterModule,
     MatButtonModule,
     MatTableModule,
+    MatIconModule,
   ],
   templateUrl: './app.component.html',
 })
