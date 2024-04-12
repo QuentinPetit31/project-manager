@@ -15,7 +15,10 @@
     <mat-icon>login</mat-icon>
     Login
   </a>
-  <p class="text-lg" *ngIf="user">Hello {{ user.name }}!</p>
+  <button mat-button class="text-lg" *ngIf="user">
+    <mat-icon>person</mat-icon>
+    Hello {{ user.name }}!
+  </button>
 </header>
 <div class="mx-auto container my-8">
   <div class="mx-4">

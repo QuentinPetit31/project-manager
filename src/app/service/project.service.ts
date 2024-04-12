@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Project } from '../page/project/project';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,10 @@ import { HttpClient } from '@angular/common/http';
 export class ProjectService {
   private projects: Project[] = [];
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router
+  ) {
     this.refreshProjects();
   }
 
@@ -69,5 +73,19 @@ export class ProjectService {
       this.refreshProjects();
       return true;
     }
+  }
+
+  delete(name: string): void {
+    console.log('delete');
+
+    this.httpClient
+      .delete<boolean>('http://localhost:3000/project/' + name)
+      .subscribe(succes => {
+        console.log('refreshProjects projects  =>', succes);
+        if (succes) {
+          this.refreshProjects();
+          this.router.navigateByUrl('/project');
+        }
+      });
   }
 }
