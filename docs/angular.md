@@ -1,12 +1,17 @@
 # Angular
+
 ## How To
+
 ### Project
+
 #### Generate a project
 
 ```console
 ng new project-name
 ```
+
 ### Component
+
 #### Generate a component
 
 ```console
@@ -26,28 +31,26 @@ import { Component } from '@angular/core';
   selector: 'kamino-not-found',
   templateUrl: './not-found.component.html',
   standalone: true,
-  imports: []
+  imports: [],
 })
 export class NotFoundComponent {
   variableOfComponent: string;
   variablesOfComponent: string[];
 
+  constructor() {}
 
-  constructor(){  }
-
-  ngOnInit(){
+  ngOnInit() {
     this.functionOfComponent();
   }
 
-  functionOfComponent(){
-    return 'bla bla'
+  functionOfComponent() {
+    return 'bla bla';
   }
 }
-
 ```
 
-
 ### Service
+
 #### Generate a Service
 
 ```console
@@ -61,6 +64,7 @@ ng g s service-name
 ### Use it
 
 #### service-name.service.ts
+
 ```typescript
 import { Injectable } from '@angular/core';
 
@@ -75,6 +79,7 @@ export class MeService {
 ```
 
 #### component-name.component.ts
+
 ```typescript
 import { Component } from '@angular/core';
 
@@ -93,22 +98,7 @@ export class NotFoundComponent {
   ngOnInit(){
     this.meService.functionOfService();
   }
-
+}
 }
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
