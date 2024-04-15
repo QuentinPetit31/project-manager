@@ -32,8 +32,8 @@ export class ProjectService {
     return this.projects;
   }
 
-  getProjectByName(name: string): Project | null {
-    let projectFind = null;
+  getProjectByName(name: string): Project | undefined {
+    let projectFind;
     for (let i = 0; i < this.projects.length; i++) {
       if (this.projects[i].name === name) {
         projectFind = this.projects[i];
@@ -69,8 +69,42 @@ export class ProjectService {
           }
           return false;
         });
+      return true;
+    }
+  }
 
-      this.refreshProjects();
+  updateProject(oldName: string, project: Project) {
+    let projectNameAlreadyUsed = false;
+
+    if (oldName !== project.name) {
+      // need to check if new name is already used
+
+      for (let i = 0; i < this.projects.length; i++) {
+        if (this.projects[i].name === project.name) {
+          projectNameAlreadyUsed = true;
+        }
+      }
+    }
+
+    console.log('Appelle createProject');
+
+    if (projectNameAlreadyUsed) {
+      console.log('Le nom du projet est déjà utilisé');
+      return false;
+    } else {
+      // ajouter un project à la liste des projects
+      // this.projects.push(project);
+      this.httpClient
+        .put('http://localhost:3000/project/' + oldName, project)
+        .subscribe(sucess => {
+          if (sucess) {
+            console.log('modification du projet finalisée');
+            // verifier ce qu'il y a dans le tableau après inscription (sans renouveler la page)
+            this.refreshProjects();
+            return true;
+          }
+          return false;
+        });
       return true;
     }
   }

@@ -60,7 +60,7 @@ export class ExerciceComponent {
     console.log(nbr1, nbr2);
 
     /* Exercice 2 : Les tests :
-Ecrire un algorithme qui prend un nombre (variable nbr1) en entrée affiche dans la console si le nombre est positif ou négatif.*/
+    Ecrire un algorithme qui prend un nombre (variable nbr1) en entrée affiche dans la console si le nombre est positif ou négatif.*/
 
     if (nbr1 > 0) {
       console.log('positive');
@@ -81,9 +81,9 @@ Ecrire un algorithme qui prend un nombre (variable nbr1) en entrée affiche dans
     tototo(nbr1, nbr2);
     tototo(5, 8);
     /*Exercice 4  : Tests :
-Ecrire un algorithme qui demande deux nombres à l’utilisateur et l’informe ensuite si le produit (multiplication) est négatif ou positif 
-(on inclut cette fois le traitement du cas où le produit peut-être nul). Attention toutefois, on ne doit pas calculer le produit ! (multiplication) 
-NB : si on multiplie 2 nombres négatif le résultat est un nombre positif.
+    Ecrire un algorithme qui demande deux nombres à l’utilisateur et l’informe ensuite si le produit (multiplication) est négatif ou positif 
+    (on inclut cette fois le traitement du cas où le produit peut-être nul). Attention toutefois, on ne doit pas calculer le produit ! (multiplication) 
+    NB : si on multiplie 2 nombres négatif le résultat est un nombre positif.
     */
     const resultProduit = nbr1 * nbr2;
     if (nbr1 > 0 && nbr2 > 0) {

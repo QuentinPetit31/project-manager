@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +12,7 @@ import {
 import { Project } from '../project/project';
 import { CommonModule } from '@angular/common';
 import { ProjectService } from '../../service/project.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 /**
  * @title Basic Inputs
@@ -32,7 +32,7 @@ import { Router } from '@angular/router';
     CommonModule,
   ],
 })
-export class CreateUpdateProjectComponent {
+export class CreateUpdateProjectComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl<string>('Project test', [
       Validators.required,
@@ -58,13 +58,35 @@ export class CreateUpdateProjectComponent {
   projectNameAlreadyUsed = false;
   passwordError = false;
 
+  project?: Project;
+
   // import porject service
   constructor(
     private projectService: ProjectService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
-  createProject() {
+  ngOnInit(): void {
+    const nameProject = this.route.snapshot.params['name'];
+    console.log(nameProject);
+    this.project = this.projectService.getProjectByName(nameProject);
+    console.log(this.project);
+
+    // this.form.controls.name.setValue()
+
+    if (this.project) {
+      this.form.setValue({
+        name: this.project.name,
+        personnes: this.project.personnes.toString(),
+        endDate: this.project.endDate,
+        startDate: this.project.startDate,
+        description: this.project.description,
+      });
+    }
+  }
+
+  submitProject() {
     console.log('-------------');
     if (this.form.valid) {
       // récupère la valeur du form
@@ -75,21 +97,34 @@ export class CreateUpdateProjectComponent {
         startDate: formValue.startDate || '',
         endDate: formValue.endDate || '',
         // if / else sur une ligne si ça alors, sinon tab vide
-        personnes: formValue.personnes ? formValue.personnes?.split(', ') : [],
+        personnes: formValue.personnes ? formValue.personnes?.split(',') : [],
         description: formValue.description || '',
       };
-      // Appel de la méthode createProject du service
-      const newProjectSucces = this.projectService.createProject(project);
-      if (newProjectSucces) {
-        console.log('Le projet a été ajouté avec succès.');
-        this.router.navigate(['/project']);
-      } else {
-        console.log(
-          "Échec de l'ajout du projet. Le nom du projet est déjà utilisé."
+      if (this.project) {
+        // UPDATE
+        const updateProjectSucces = this.projectService.updateProject(
+          this.project.name,
+          project
         );
-        //afficher erreur en rouge sous le bouton
-        //si erreur message sous bouton
-        this.projectNameAlreadyUsed = true;
+        if (updateProjectSucces) {
+          console.log('Le projet a été modifié avec succès.');
+          this.router.navigate(['/project']);
+        } else {
+          // CREATE
+          // Appel de la méthode createProject du service
+          const newProjectSucces = this.projectService.createProject(project);
+          if (newProjectSucces) {
+            console.log('Le projet a été ajouté avec succès.');
+            this.router.navigate(['/project']);
+          } else {
+            console.log(
+              "Échec de l'ajout du projet. Le nom du projet est déjà utilisé."
+            );
+            //afficher erreur en rouge sous le bouton
+            //si erreur message sous bouton
+            this.projectNameAlreadyUsed = true;
+          }
+        }
       }
     }
   }

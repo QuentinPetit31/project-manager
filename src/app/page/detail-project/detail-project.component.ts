@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Project } from '../project/project';
 import { ProjectService } from '../../service/project.service';
 import { CommonModule } from '@angular/common';
@@ -10,10 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [CommonModule, MatButtonModule, RouterModule],
   templateUrl: './detail-project.component.html',
-  styleUrl: './detail-project.component.scss',
 })
 export class DetailProjectComponent implements OnInit {
-  project: Project | null = null;
+  project?: Project;
 
   constructor(
     private route: ActivatedRoute,
