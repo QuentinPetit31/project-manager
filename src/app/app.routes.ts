@@ -8,6 +8,7 @@ import { ProjectComponent } from './page/project/project.component';
 import { DetailProjectComponent } from './page/detail-project/detail-project.component';
 import { CreateUpdateProjectComponent } from './page/create-update-project/create-update-project.component';
 import { PersonComponent } from './page/person/person.component';
+import { DetailPersonComponent } from './page/detail-person/detail-person.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'project/:name/update', component: CreateUpdateProjectComponent }, // , canActivate: [AuthGuard]
 
   { path: 'person', component: PersonComponent, canActivate: [AuthGuard] },
+  { path: 'person/:name', component: DetailPersonComponent }, // , canActivate: [AuthGuard]
 
   { path: '**', redirectTo: '' },
 ];

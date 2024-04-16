@@ -1,0 +1,63 @@
+<h1>Create a project</h1>
+<form
+  [formGroup]="form"
+  class="grid lg:grid-cols-2 lg:gap-6 mx-4"
+  (ngSubmit)="submitProject()">
+  <mat-form-field>
+    <mat-label>Project name</mat-label>
+    <input
+      formControlName="name"
+      matInput
+      placeholder="Ex: Create a website"
+      value="" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Project's contributors</mat-label>
+    <input
+      formControlName="personnes"
+      matInput
+      placeholder="Ex: Thomas,Quentin"
+      value="" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Start date</mat-label>
+    <input
+      formControlName="startDate"
+      matInput
+      placeholder="Ex: Create a website"
+      value="01/01/2024" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>End date</mat-label>
+    <input
+      formControlName="endDate"
+      matInput
+      placeholder="Ex: Create a website"
+      value="01/01/2024" />
+  </mat-form-field>
+
+  <mat-form-field class="lg:col-span-2 grid justify-center">
+    <mat-label>Describe the project</mat-label>
+    <textarea
+      formControlName="description"
+      matInput
+      placeholder="Ex.The objective was..."></textarea>
+  </mat-form-field>
+
+  <div class="lg:col-span-2 grid justify-center">
+    <button
+      class="w-80"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!form.valid">
+      Publish my project
+    </button>
+    <p *ngIf="projectNameAlreadyUsed" class="text-red-500 mx-auto">
+      Projet's name already used
+    </p>
+  </div>
+</form>
