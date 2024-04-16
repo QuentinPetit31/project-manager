@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Project } from '../page/project/project';
+import { Project } from './project';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 

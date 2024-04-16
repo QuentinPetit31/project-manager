@@ -9,9 +9,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Job, Jobs, Person } from '../person/person';
+import { Job, Jobs, Person } from '../../../services/person';
 import { CommonModule } from '@angular/common';
-import { PersonService } from '../../service/person.service';
+import { PersonService } from '../../../services/person.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 

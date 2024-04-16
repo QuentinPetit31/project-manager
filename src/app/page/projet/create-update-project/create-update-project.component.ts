@@ -9,9 +9,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Project } from '../project/project';
+import { Project } from '../../../services/project';
 import { CommonModule } from '@angular/common';
-import { ProjectService } from '../../service/project.service';
+import { ProjectService } from '../../../services/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 /**

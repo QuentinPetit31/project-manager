@@ -3,7 +3,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { User, UserService } from './service/user.service';
+import { User, UserService } from './services/user.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 

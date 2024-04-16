@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
-import { PersonService } from '../../service/person.service';
+import { PersonService } from '../../../services/person.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 
@@ -9,9 +9,9 @@ import { MatTableModule } from '@angular/material/table';
   selector: 'app-person',
   standalone: true,
   imports: [RouterModule, MatButtonModule, CommonModule, MatTableModule],
-  templateUrl: './person.component.html',
+  templateUrl: './list-person.component.html',
 })
-export class PersonComponent {
+export class PersonListComponent {
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'job'];
 
   get persons() {
