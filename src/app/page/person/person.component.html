@@ -34,7 +34,7 @@
   <tr
     mat-row
     *matRowDef="let row; columns: displayedColumns"
-    [routerLink]="['/person', row.name]"
+    [routerLink]="['/person', row.id]"
     class="cursor-pointer hover:bg-gray-200"></tr>
 </table>
 <div class="grid grid-flow-row w-1/2 mx-auto my-12 lg:grid-flow-col">

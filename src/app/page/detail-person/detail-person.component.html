@@ -8,22 +8,18 @@
   Please try again.
 </h2>
 <div *ngIf="persons" class="lg:w-1/2 mx-auto flex flex-col space-y-4">
-  <h2>Person: {{ persons.id }}</h2>
+  <h2>
+    ID: <span>{{ persons.id }}</span>
+  </h2>
+
   <div class="grid gap-5 grid-flow-row lg:grid-flow-col">
     <h2 class="inline-block">Last Name:</h2>
     <p class="inline-block">{{ persons.lastName }}</p>
     <h2>First Name:</h2>
     <p class="inline-block">{{ persons.firstName }}</p>
   </div>
-  <!-- 
-  <h2>Descritption:</h2>
-  <p>{{ persons.job }}</p> -->
-  <h2>People:</h2>
-  <ul class="list-disc ml-12">
-    <li *ngFor="let person of persons.job">
-      {{ person }}
-    </li>
-  </ul>
+  <h2>Job:</h2>
+  <p>{{ persons.job }}</p>
   <div
     *ngIf="persons"
     class="grid gap-5 grid-flow-row w-1/2 mt-20 h-28 lg:grid-flow-col">

@@ -1,50 +1,27 @@
-<h1>Create a project</h1>
+<h1>Add a person</h1>
 <form
   [formGroup]="form"
   class="grid lg:grid-cols-2 lg:gap-6 mx-4"
-  (ngSubmit)="submitProject()">
+  (ngSubmit)="submitPerson()">
   <mat-form-field>
-    <mat-label>Project name</mat-label>
+    <mat-label>First name</mat-label>
     <input
-      formControlName="name"
+      formControlName="firstName"
       matInput
-      placeholder="Ex: Create a website"
+      placeholder="Ex: Thomas"
       value="" />
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Project's contributors</mat-label>
-    <input
-      formControlName="personnes"
-      matInput
-      placeholder="Ex: Thomas,Quentin"
-      value="" />
+    <mat-label>Last name</mat-label>
+    <input formControlName="lastName" matInput placeholder="Petito" value="" />
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Start date</mat-label>
-    <input
-      formControlName="startDate"
-      matInput
-      placeholder="Ex: Create a website"
-      value="01/01/2024" />
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>End date</mat-label>
-    <input
-      formControlName="endDate"
-      matInput
-      placeholder="Ex: Create a website"
-      value="01/01/2024" />
-  </mat-form-field>
-
-  <mat-form-field class="lg:col-span-2 grid justify-center">
-    <mat-label>Describe the project</mat-label>
-    <textarea
-      formControlName="description"
-      matInput
-      placeholder="Ex.The objective was..."></textarea>
+    <mat-label>Job</mat-label>
+    <mat-select formControlName="job">
+      <mat-option *ngFor="let job of jobs" [value]="job">{{ job }}</mat-option>
+    </mat-select>
   </mat-form-field>
 
   <div class="lg:col-span-2 grid justify-center">
@@ -54,10 +31,10 @@
       color="primary"
       type="submit"
       [disabled]="!form.valid">
-      Publish my project
+      Publish new person
     </button>
-    <p *ngIf="projectNameAlreadyUsed" class="text-red-500 mx-auto">
-      Projet's name already used
+    <p *ngIf="personIdAlreadyUsed" class="text-red-500 mx-auto">
+      This ID's number has already been used.
     </p>
   </div>
 </form>

@@ -71,4 +71,5 @@ export class PersonService {
         }
       });
   }
+  updatePerson(person: Person) {}
 }

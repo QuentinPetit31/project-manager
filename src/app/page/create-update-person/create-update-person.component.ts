@@ -9,121 +9,108 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Project } from '../project/project';
+import { Job, Jobs, Person } from '../person/person';
 import { CommonModule } from '@angular/common';
-import { ProjectService } from '../../service/project.service';
+import { PersonService } from '../../service/person.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
 
 /**
  * @title Basic Inputs
  */
 @Component({
-  selector: 'app-create-update-project',
-  styleUrl: 'create-update-project.component.scss',
-  templateUrl: 'create-update-project.component.html',
+  selector: 'app-create-update-person',
+  templateUrl: 'create-update-person.component.html',
   standalone: true,
   imports: [
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    CreateUpdateProjectComponent,
+    CreateUpdatePersonComponent,
     MatButtonModule,
     ReactiveFormsModule,
     CommonModule,
+    MatSelectModule,
   ],
 })
-export class CreateUpdateProjectComponent implements OnInit {
+export class CreateUpdatePersonComponent implements OnInit {
   form = new FormGroup({
-    name: new FormControl<string>('Project test', [
+    firstName: new FormControl<string>('FirstName', [
       Validators.required,
       Validators.minLength(2),
     ]),
-    personnes: new FormControl<string>('contributor, test , Anna', [
+    lastName: new FormControl<string>('LastName', [
       Validators.required,
       Validators.minLength(2),
     ]),
-    startDate: new FormControl<string>('01/01/2024', [
-      Validators.required,
-      Validators.minLength(2),
-    ]),
-    endDate: new FormControl<string>('01/01/2024', [
-      Validators.required,
-      Validators.minLength(2),
-    ]),
-    description: new FormControl<string>('Description test', [
+    job: new FormControl<Job>('Intern', [
       Validators.required,
       Validators.minLength(2),
     ]),
   });
-  projectNameAlreadyUsed = false;
+  jobs: Job[] = Jobs;
+  personIdAlreadyUsed = false;
   passwordError = false;
 
-  project?: Project;
+  person?: Person;
 
-  // import porject service
+  // import person service
   constructor(
-    private projectService: ProjectService,
+    private personService: PersonService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    const nameProject = this.route.snapshot.params['name'];
-    console.log(nameProject);
-    this.project = this.projectService.getProjectByName(nameProject);
-    console.log(this.project);
+    const idPersons = this.route.snapshot.params['id'];
+    console.log(idPersons);
+    this.person = this.personService.getPersonById(idPersons);
+    console.log(this.person);
 
-    // this.form.controls.name.setValue()
+    // this.form.controls.id.setValue()
 
-    if (this.project) {
+    if (this.person) {
       this.form.setValue({
-        name: this.project.name,
-        personnes: this.project.personnes.toString(),
-        endDate: this.project.endDate,
-        startDate: this.project.startDate,
-        description: this.project.description,
+        firstName: this.person.firstName,
+        lastName: this.person.lastName,
+        job: this.person.job,
       });
     }
   }
 
-  submitProject() {
+  submitPerson() {
     console.log('-------------');
     if (this.form.valid) {
       // récupère la valeur du form
       const formValue = this.form.getRawValue();
-      console.log('createProject formValue = ', formValue);
-      const project: Project = {
-        name: formValue.name || '',
-        startDate: formValue.startDate || '',
-        endDate: formValue.endDate || '',
+      console.log('createPerson formValue = ', formValue);
+      const person: Person = {
+        firstName: formValue.firstName || '',
+        lastName: formValue.lastName || '',
         // if / else sur une ligne si ça alors, sinon tab vide
-        personnes: formValue.personnes ? formValue.personnes?.split(',') : [],
-        description: formValue.description || '',
+        job: formValue.job || 'Intern',
       };
-      if (this.project) {
+      if (this.person) {
         // UPDATE
-        const updateProjectSucces = this.projectService.updateProject(
-          this.project.name,
-          project
-        );
-        if (updateProjectSucces) {
-          console.log('Le projet a été modifié avec succès.');
-          this.router.navigate(['/project']);
+        // const updatePersonSucces = this.personService.updatePerson(person);
+        if (person) {
+          // console.log('Le projet a été modifié avec succès.');
+          // this.router.navigate(['/person']);
+        }
+      } else {
+        // CREATE
+        // Appel de la méthode createProject du service
+        const newPersonSucces = this.personService.createPerson(person);
+        if (newPersonSucces) {
+          console.log('La personne a été ajoutée avec succès.');
+          this.router.navigate(['/person']);
         } else {
-          // CREATE
-          // Appel de la méthode createProject du service
-          const newProjectSucces = this.projectService.createProject(project);
-          if (newProjectSucces) {
-            console.log('Le projet a été ajouté avec succès.');
-            this.router.navigate(['/project']);
-          } else {
-            console.log(
-              "Échec de l'ajout du projet. Le nom du projet est déjà utilisé."
-            );
-            //afficher erreur en rouge sous le bouton
-            //si erreur message sous bouton
-            this.projectNameAlreadyUsed = true;
-          }
+          console.log(
+            "Échec de l'ajout du projet. Le nom du projet est déjà utilisé."
+          );
+          //afficher erreur en rouge sous le bouton
+          //si erreur message sous bouton
+          this.personIdAlreadyUsed = true;
         }
       }
     }

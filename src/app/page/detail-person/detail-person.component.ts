@@ -29,7 +29,7 @@ export class DetailPersonComponent implements OnInit {
   }
 
   delete() {
-    if (this.persons) {
+    if (this.persons && this.persons.id) {
       this.personService.delete(this.persons.id);
     }
   }

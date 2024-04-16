@@ -19,7 +19,6 @@ import { ActivatedRoute, Router } from '@angular/router';
  */
 @Component({
   selector: 'app-create-update-project',
-  styleUrl: 'create-update-project.component.scss',
   templateUrl: 'create-update-project.component.html',
   standalone: true,
   imports: [
@@ -60,7 +59,7 @@ export class CreateUpdateProjectComponent implements OnInit {
 
   project?: Project;
 
-  // import porject service
+  // import project service
   constructor(
     private projectService: ProjectService,
     private router: Router,
@@ -109,31 +108,23 @@ export class CreateUpdateProjectComponent implements OnInit {
         if (updateProjectSucces) {
           console.log('Le projet a été modifié avec succès.');
           this.router.navigate(['/project']);
+        }
+      } else {
+        // CREATE
+        // Appel de la méthode createProject du service
+        const newProjectSucces = this.projectService.createProject(project);
+        if (newProjectSucces) {
+          console.log('Le projet a été ajouté avec succès.');
+          this.router.navigate(['/project']);
         } else {
-          // CREATE
-          // Appel de la méthode createProject du service
-          const newProjectSucces = this.projectService.createProject(project);
-          if (newProjectSucces) {
-            console.log('Le projet a été ajouté avec succès.');
-            this.router.navigate(['/project']);
-          } else {
-            console.log(
-              "Échec de l'ajout du projet. Le nom du projet est déjà utilisé."
-            );
-            //afficher erreur en rouge sous le bouton
-            //si erreur message sous bouton
-            this.projectNameAlreadyUsed = true;
-          }
+          console.log(
+            "Échec de l'ajout du projet. Le nom du projet est déjà utilisé."
+          );
+          //afficher erreur en rouge sous le bouton
+          //si erreur message sous bouton
+          this.projectNameAlreadyUsed = true;
         }
       }
     }
   }
 }
-// ng on init pour récuperer le param project
-// (nom du projet ciblé dans l'url comme dans détail)
-// regarder si projet correspond (getprojetbyname())
-// scénario d'erreur, pas de projet -> ramener vers parge tab projet
-// si il existe, préremplir champ du formulaire avec les valeurs du projet
-// store initial title - créer variable update title pour pouvoir valider
-// une modification faire un for chercher dans un tableau[i].length
-// trouver le bon, le modifier
