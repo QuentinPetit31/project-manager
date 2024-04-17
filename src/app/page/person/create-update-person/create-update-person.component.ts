@@ -91,12 +91,16 @@ export class CreateUpdatePersonComponent implements OnInit {
         job: formValue.job || 'Intern',
       };
       if (this.person) {
+        person.id = this.person.id;
         // UPDATE
-        // const updatePersonSucces = this.personService.updatePerson(person);
-        if (person) {
-          // console.log('Le projet a été modifié avec succès.');
-          // this.router.navigate(['/person']);
-        }
+        this.personService.updatePerson(person).subscribe(sucess => {
+          if (sucess) {
+            console.log('modification de person finalisée');
+            this.router.navigate(['/person']);
+          } else {
+            // ERROR
+          }
+        });
       } else {
         // CREATE
         // Appel de la méthode createProject du service
@@ -116,11 +120,3 @@ export class CreateUpdatePersonComponent implements OnInit {
     }
   }
 }
-// ng on init pour récuperer le param project
-// (nom du projet ciblé dans l'url comme dans détail)
-// regarder si projet correspond (getprojetbyname())
-// scénario d'erreur, pas de projet -> ramener vers parge tab projet
-// si il existe, préremplir champ du formulaire avec les valeurs du projet
-// store initial title - créer variable update title pour pouvoir valider
-// une modification faire un for chercher dans un tableau[i].length
-// trouver le bon, le modifier

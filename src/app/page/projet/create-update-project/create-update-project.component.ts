@@ -13,6 +13,8 @@ import { Project } from '../../../services/project';
 import { CommonModule } from '@angular/common';
 import { ProjectService } from '../../../services/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
+import { PersonService } from '../../../services/person.service';
 
 /**
  * @title Basic Inputs
@@ -29,6 +31,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     MatButtonModule,
     ReactiveFormsModule,
     CommonModule,
+    MatSelectModule,
   ],
 })
 export class CreateUpdateProjectComponent implements OnInit {
@@ -37,18 +40,19 @@ export class CreateUpdateProjectComponent implements OnInit {
       Validators.required,
       Validators.minLength(2),
     ]),
-    personnes: new FormControl<string>('contributor, test , Anna', [
-      Validators.required,
-      Validators.minLength(2),
-    ]),
+
+    personnes: new FormControl<string[]>([], [Validators.required]),
+
     startDate: new FormControl<string>('01/01/2024', [
       Validators.required,
       Validators.minLength(2),
     ]),
+
     endDate: new FormControl<string>('01/01/2024', [
       Validators.required,
       Validators.minLength(2),
     ]),
+
     description: new FormControl<string>('Description test', [
       Validators.required,
       Validators.minLength(2),
@@ -59,11 +63,16 @@ export class CreateUpdateProjectComponent implements OnInit {
 
   project?: Project;
 
+  get persons() {
+    return this.personService.getAllPersons();
+  }
+
   // import project service
   constructor(
     private projectService: ProjectService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private personService: PersonService
   ) {}
 
   ngOnInit(): void {
@@ -77,7 +86,7 @@ export class CreateUpdateProjectComponent implements OnInit {
     if (this.project) {
       this.form.setValue({
         name: this.project.name,
-        personnes: this.project.personnes.toString(),
+        personnes: this.project.personnes,
         endDate: this.project.endDate,
         startDate: this.project.startDate,
         description: this.project.description,
@@ -96,7 +105,7 @@ export class CreateUpdateProjectComponent implements OnInit {
         startDate: formValue.startDate || '',
         endDate: formValue.endDate || '',
         // if / else sur une ligne si ça alors, sinon tab vide
-        personnes: formValue.personnes ? formValue.personnes?.split(',') : [],
+        personnes: formValue.personnes ? formValue.personnes : [],
         description: formValue.description || '',
       };
       if (this.project) {

@@ -4,7 +4,7 @@
   class="grid lg:grid-cols-2 lg:gap-6 mx-4"
   (ngSubmit)="submitProject()">
   <mat-form-field>
-    <mat-label>Project name</mat-label>
+    <mat-label>Project's name</mat-label>
     <input
       formControlName="name"
       matInput
@@ -14,11 +14,13 @@
 
   <mat-form-field>
     <mat-label>Project's contributors</mat-label>
-    <input
-      formControlName="personnes"
-      matInput
-      placeholder="Ex: Thomas,Quentin"
-      value="" />
+    <mat-select formControlName="personnes" multiple>
+      @for (person of persons; track person) {
+        <mat-option [value]="person.firstName"
+          >{{ person.firstName + ' ' + person.lastName }}
+        </mat-option>
+      }
+    </mat-select>
   </mat-form-field>
 
   <mat-form-field>

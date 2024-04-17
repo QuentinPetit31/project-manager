@@ -2,15 +2,13 @@ import { Injectable } from '@angular/core';
 import { Person } from './person';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PersonService {
-  private persons: Person[] = [
-    { id: '01', firstName: 'Quentin', lastName: 'Petit', job: 'Web Developer' },
-    { id: '02', firstName: 'Thomas', lastName: 'Petit', job: 'Web Developer' },
-  ];
+  private persons: Person[] = [];
 
   private person: Person | null = null;
 
@@ -37,14 +35,16 @@ export class PersonService {
   }
 
   createPerson(newPerson: Person): boolean {
-    // check request.body have the good format
-    if (!newPerson.id || newPerson.id.length <= 2) {
-      return false;
-    }
-    // check if person name already exist
-
-    this.persons.push(newPerson);
-    console.log('createUser success', newPerson);
+    this.httpClient
+      .post<boolean>('http://localhost:3000/person', newPerson)
+      .subscribe(isSuccess => {
+        if (isSuccess) {
+          console.log('createPerson success', newPerson);
+          this.refreshPersons();
+        } else {
+          console.log('createPerson error', newPerson);
+        }
+      });
     return true;
   }
 
@@ -56,6 +56,22 @@ export class PersonService {
       }
     }
     return personFind;
+  }
+
+  updatePerson(person: Person) {
+    // ajouter un project à la liste des projects
+    // this.projects.push(person);
+    return this.httpClient
+      .put<boolean>('http://localhost:3000/person/', person)
+      .pipe(
+        tap(sucess => {
+          if (sucess) {
+            console.log('modification de person finalisée');
+            // verifier ce qu'il y a dans le tableau après inscription (sans renouveler la page)
+            this.refreshPersons();
+          }
+        })
+      );
   }
 
   delete(id: string): void {
@@ -71,5 +87,4 @@ export class PersonService {
         }
       });
   }
-  updatePerson(person: Person) {}
 }
