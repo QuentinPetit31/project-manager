@@ -1,6 +1,12 @@
 <h1>Project</h1>
 
 <table mat-table [dataSource]="projects">
+  <!-- Project id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>id</th>
+    <td mat-cell *matCellDef="let project">{{ project.id }}</td>
+  </ng-container>
+
   <!-- Project Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Project Name</th>

@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class ProjectListComponent {
   displayedColumns: string[] = [
+    'id',
     'name',
     'description',
     'startDate',

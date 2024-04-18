@@ -80,7 +80,7 @@ export class PersonService {
     this.httpClient
       .delete<boolean>('http://localhost:3000/person/' + id)
       .subscribe(succes => {
-        console.log('refreshProjects projects  =>', succes);
+        console.log('refreshProjects person  =>', succes);
         if (succes) {
           this.refreshPersons();
           this.router.navigateByUrl('/person');
