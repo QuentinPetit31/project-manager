@@ -48,7 +48,9 @@ export class LoginComponent {
   constructor(
     private userService: UserService,
     private router: Router
-  ) {}
+  ) {
+    userService.refresh();
+  }
 
   login() {
     // if form valide

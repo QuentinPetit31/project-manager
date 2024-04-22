@@ -1,6 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { pipe, tap } from 'rxjs';
 
 export interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface CreateUser {
   name: string;
   email: string;
   password: string;
@@ -10,13 +20,30 @@ export interface User {
   providedIn: 'root',
 })
 export class UserService {
-  private users: User[] = [
-    { name: 'Quentin', email: 'quentin@mail.com', password: '123azerty' },
-    { name: 'Thomas', email: 'thomas@mail.com', password: '123azerty' },
-  ];
+  private users: User[] = [];
   private user: User | null = null;
 
-  constructor() {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router
+  ) {}
+
+  refresh(): void {
+    console.log('refreshUsers');
+
+    this.httpClient
+      .get<User[]>('http://localhost:3000/users')
+      .subscribe(users => {
+        console.log('refreshProjects users  =>', users);
+        this.users = users;
+      });
+  }
+
+  create(newUser: CreateUser) {
+    return this.httpClient
+      .post<boolean>('http://localhost:3000/users', newUser)
+      .pipe(tap(() => this.refresh()));
+  }
 
   /**
    * return current logged user
@@ -33,29 +60,12 @@ export class UserService {
   // if yes, you store the user and return true
   // if no, return false
   // return to the user a response (connection ok or not)
-  login(user: { email: string; password: string }): boolean {
+  login(userLogin: { email: string; password: string }): boolean {
     // soit faire :
-    // const foundUser = this.users.find(
-    //   user => user.email === user.email && user.password === user.password
-    // );
-    // if (foundUser) {
-    //   this.user = foundUser;
-    //   console.log("l'utilisateur existe");
-    //   return true;
-    // } else {
-    //   console.log('Les éléments renseignés ne sont pas correctes');
-    //   return false;
-    // }
-    //soit faire :
-    let foundUser = null;
-    for (let i = 0; i < this.users.length; i++) {
-      if (
-        this.users[i].email === user.email &&
-        this.users[i].password === user.password
-      ) {
-        foundUser = this.users[i];
-      }
-    }
+    const foundUser = this.users.find(
+      user =>
+        user.email === userLogin.email && userLogin.password === user.password
+    );
     if (foundUser) {
       this.user = foundUser;
       console.log("l'utilisateur existe");
@@ -63,39 +73,6 @@ export class UserService {
     } else {
       console.log('Les éléments renseignés ne sont pas correctes');
       return false;
-    }
-  }
-
-  register(user: User): boolean {
-    console.log('Appelle serviceRegister');
-    //Regarder que le mail est unique et que le mdp fait au moins 8 charactères
-    //name et mdp if
-    if (user.name?.length < 2 && user.password.length < 8) {
-      return false;
-    }
-
-    let mailAlreadyUsed = false;
-
-    for (let i = 0; i < this.users.length; i++) {
-      if (
-        //user.name à rajouter avec 1 charac au minimum et il faut qu'aucun utilisateur ne
-        //contienne un mail déjà présent dans la liste, après push dans le tab
-        this.users[i].email === user.email
-      ) {
-        mailAlreadyUsed = true;
-      }
-    }
-
-    if (mailAlreadyUsed) {
-      console.log('Le mail est déjà utilisé');
-      return false;
-    } else {
-      // ajouter l'utilisateur a la liste des utilisateurs
-      this.users.push(user);
-      console.log('inscription finalisée');
-      // verifier ce qu'il y a dans le tableau après inscription (sans renouveler la page)
-      console.log(this.users);
-      return true;
     }
   }
 }

@@ -65,21 +65,24 @@ export class EnrollComponent {
       if (formValue.password === formValue.confirmPassword) {
         this.passwordError = false;
         // Appel de la méthode login du service UserService avec les informations du formulaire
-        const registerSuccess = this.userService.register({
-          name: formValue.name || '',
-          email: formValue.email || '',
-          password: formValue.password || '',
-        });
 
-        console.log('registerSuccess', registerSuccess);
-        // si ok redirection homepage
-        if (registerSuccess) {
-          this.router.navigate(['/login']);
-          // <a routerLink="/login" mat-button>this.userService.login(formValue)</a>
-        } else {
-          //si erreur message sous bouton
-          this.asError = true;
-        }
+        this.userService
+          .create({
+            name: formValue.name || '',
+            email: formValue.email || '',
+            password: formValue.password || '',
+          })
+          .subscribe(registerSuccess => {
+            console.log('registerSuccess', registerSuccess);
+            // si ok redirection homepage
+            if (registerSuccess) {
+              this.router.navigate(['/login']);
+              // <a routerLink="/login" mat-button>this.userService.login(formValue)</a>
+            } else {
+              //si erreur message sous bouton
+              this.asError = true;
+            }
+          });
       } else {
         this.passwordError = true;
       }
