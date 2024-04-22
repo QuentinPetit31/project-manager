@@ -23,22 +23,24 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Start date</mat-label>
-    <input
-      formControlName="startDate"
-      matInput
-      placeholder="Ex: Create a website"
-      value="01/01/2024" />
-  </mat-form-field>
+  <mat-form-field class="example-form-field">
+    <mat-label>Project's range</mat-label>
 
-  <mat-form-field>
-    <mat-label>End date</mat-label>
-    <input
-      formControlName="endDate"
-      matInput
-      placeholder="Ex: Create a website"
-      value="01/01/2024" />
+    <mat-date-range-input
+      [rangePicker]="rangeProject"
+      [comparisonStart]="form.controls.startDate.value"
+      [comparisonEnd]="form.controls.endDate.value">
+      <input
+        matStartDate
+        placeholder="Start date"
+        formControlName="startDate" />
+      <input matEndDate placeholder="End date" formControlName="endDate" />
+    </mat-date-range-input>
+    <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="rangeProject"></mat-datepicker-toggle>
+    <mat-date-range-picker #rangeProject></mat-date-range-picker>
   </mat-form-field>
 
   <mat-form-field class="lg:col-span-2 grid justify-center">

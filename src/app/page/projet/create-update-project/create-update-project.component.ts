@@ -15,6 +15,11 @@ import { ProjectService } from '../../../services/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { PersonService } from '../../../services/person.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+  MAT_DATE_LOCALE,
+  provideNativeDateAdapter,
+} from '@angular/material/core';
 
 /**
  * @title Basic Inputs
@@ -23,6 +28,10 @@ import { PersonService } from '../../../services/person.service';
   selector: 'app-create-update-project',
   templateUrl: 'create-update-project.component.html',
   standalone: true,
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    provideNativeDateAdapter(),
+  ],
   imports: [
     FormsModule,
     MatFormFieldModule,
@@ -32,6 +41,7 @@ import { PersonService } from '../../../services/person.service';
     ReactiveFormsModule,
     CommonModule,
     MatSelectModule,
+    MatDatepickerModule,
   ],
 })
 export class CreateUpdateProjectComponent implements OnInit {
@@ -43,12 +53,12 @@ export class CreateUpdateProjectComponent implements OnInit {
 
     personnes: new FormControl<string[]>([], [Validators.required]),
 
-    startDate: new FormControl<string>('01/01/2024', [
+    startDate: new FormControl<Date>(new Date(), [
       Validators.required,
       Validators.minLength(2),
     ]),
 
-    endDate: new FormControl<string>('01/01/2024', [
+    endDate: new FormControl<Date>(new Date(), [
       Validators.required,
       Validators.minLength(2),
     ]),
@@ -58,6 +68,7 @@ export class CreateUpdateProjectComponent implements OnInit {
       Validators.minLength(2),
     ]),
   });
+
   projectNameAlreadyUsed = false;
   passwordError = false;
 
@@ -87,8 +98,9 @@ export class CreateUpdateProjectComponent implements OnInit {
       this.form.setValue({
         name: this.project.name,
         personnes: this.project.personnes,
-        endDate: this.project.endDate,
-        startDate: this.project.startDate,
+        // String to date
+        startDate: new Date(this.project.startDate),
+        endDate: new Date(this.project.endDate),
         description: this.project.description,
       });
     }
@@ -102,8 +114,9 @@ export class CreateUpdateProjectComponent implements OnInit {
       console.log('createProject formValue = ', formValue);
       const project: Project = {
         name: formValue.name || '',
-        startDate: formValue.startDate || '',
-        endDate: formValue.endDate || '',
+        // Date to string
+        startDate: formValue.startDate?.toISOString() || '',
+        endDate: formValue.endDate?.toISOString() || '',
         // if / else sur une ligne si ça alors, sinon tab vide
         personnes: formValue.personnes ? formValue.personnes : [],
         description: formValue.description || '',
