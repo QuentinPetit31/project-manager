@@ -20,7 +20,7 @@ export class ProjectService {
     console.log('refreshProjects');
 
     this.httpClient
-      .get<Project[]>('http://localhost:3000/project')
+      .get<Project[]>('http://localhost:3000/projects')
       .subscribe(projects => {
         console.log('refreshProjects projects  =>', projects);
         this.projects = projects;
@@ -59,7 +59,7 @@ export class ProjectService {
       // ajouter un project à la liste des projects
       // this.projects.push(project);
       this.httpClient
-        .post('http://localhost:3000/project/create', project)
+        .post('http://localhost:3000/projects/create', project)
         .subscribe(sucess => {
           if (sucess) {
             console.log('inscription finalisée');
@@ -95,7 +95,7 @@ export class ProjectService {
       // ajouter un project à la liste des projects
       // this.projects.push(project);
       this.httpClient
-        .put('http://localhost:3000/project/' + oldName, project)
+        .put('http://localhost:3000/projects/' + oldName, project)
         .subscribe(sucess => {
           if (sucess) {
             console.log('modification du projet finalisée');
@@ -113,7 +113,7 @@ export class ProjectService {
     console.log('delete');
 
     this.httpClient
-      .delete<boolean>('http://localhost:3000/project/' + name)
+      .delete<boolean>('http://localhost:3000/projects/' + name)
       .subscribe(succes => {
         console.log('refreshProjects projects  =>', succes);
         if (succes) {

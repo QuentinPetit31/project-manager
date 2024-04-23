@@ -27,7 +27,7 @@ export class PersonService {
     console.log('refreshPersons');
 
     this.httpClient
-      .get<Person[]>('http://localhost:3000/person')
+      .get<Person[]>('http://localhost:3000/persons')
       .subscribe(persons => {
         console.log('refreshProjects projects  =>', persons);
         this.persons = persons;
@@ -36,7 +36,7 @@ export class PersonService {
 
   createPerson(newPerson: Person): boolean {
     this.httpClient
-      .post<boolean>('http://localhost:3000/person', newPerson)
+      .post<boolean>('http://localhost:3000/persons', newPerson)
       .subscribe(isSuccess => {
         if (isSuccess) {
           console.log('createPerson success', newPerson);
@@ -48,7 +48,7 @@ export class PersonService {
     return true;
   }
 
-  getPersonById(id: string): Person | undefined {
+  getPersonById(id: number): Person | undefined {
     let personFind;
     for (let i = 0; i < this.persons.length; i++) {
       if (this.persons[i].id === id) {
@@ -62,7 +62,7 @@ export class PersonService {
     // ajouter un project à la liste des projects
     // this.projects.push(person);
     return this.httpClient
-      .put<boolean>('http://localhost:3000/person/', person)
+      .put<boolean>('http://localhost:3000/persons/', person)
       .pipe(
         tap(sucess => {
           if (sucess) {
@@ -74,13 +74,13 @@ export class PersonService {
       );
   }
 
-  delete(id: string): void {
+  delete(id: number): void {
     console.log('delete');
 
     this.httpClient
-      .delete<boolean>('http://localhost:3000/person/' + id)
+      .delete<boolean>('http://localhost:3000/persons/' + id)
       .subscribe(succes => {
-        console.log('refreshProjects person  =>', succes);
+        console.log('refreshProjects persons  =>', succes);
         if (succes) {
           this.refreshPersons();
           this.router.navigateByUrl('/person');

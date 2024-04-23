@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { Person } from '../../../services/person';
@@ -12,25 +12,32 @@ import { PersonService } from '../../../services/person.service';
   templateUrl: './detail-person.component.html',
 })
 export class DetailPersonComponent implements OnInit {
-  persons?: Person;
+  person?: Person;
 
   constructor(
     private route: ActivatedRoute,
-    private personService: PersonService
+    private personService: PersonService,
+    private router: Router
   ) {}
 
-  // s'il arrive a le recup c'est une update sinon c'est une create
-  // a copier dans l'autre fichier
+  // s'il arrive a le recupérer c'est une update sinon c'est une create
   ngOnInit(): void {
-    const idPersons = this.route.snapshot.params['id'];
-    console.log(idPersons);
-    this.persons = this.personService.getPersonById(idPersons);
-    console.log(this.persons);
+    const idPersonString = this.route.snapshot.params['id'];
+    console.log('idPersonString =', idPersonString);
+    //typeof pour visualiser un type
+    console.log('typeof idPersonString', typeof idPersonString);
+
+    const idPerson = Number(idPersonString);
+    if (!isNaN(idPerson)) {
+      this.person = this.personService.getPersonById(idPerson);
+      console.log('this.persons =', this.person);
+    }
   }
 
   delete() {
-    if (this.persons && this.persons.id) {
-      this.personService.delete(this.persons.id);
+    if (this.person && this.person.id) {
+      this.personService.delete(this.person.id);
     }
+    this.router.navigateByUrl('/person');
   }
 }

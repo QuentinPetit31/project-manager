@@ -28,7 +28,7 @@ export const Jobs: Job[] = [
 ];
 
 export interface Person {
-  id?: string;
+  id?: number;
   firstName: string;
   lastName: string;
   job: Job;

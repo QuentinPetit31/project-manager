@@ -37,11 +37,11 @@ export class DetailProjectComponent implements OnInit {
       console.log('this.project?.personnes', this.project?.personnes);
       this.project.personnes.forEach(personId => {
         console.log(personId);
-        const person = this.personService.getPersonById(personId);
-        console.log('person', person);
-        if (person) {
-          this.persons.push(person);
-        }
+        // const person = this.personService.getPersonById(personId);
+        // console.log('person', person);
+        // if (person) {
+        //   this.persons.push(person);
+        // }
       });
     }
   }

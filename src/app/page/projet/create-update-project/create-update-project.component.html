@@ -14,7 +14,7 @@
 
   <mat-form-field>
     <mat-label>Project's contributors</mat-label>
-    <mat-select formControlName="personnes" multiple>
+    <mat-select formControlName="persons" multiple>
       @for (person of persons; track person) {
         <mat-option [value]="person.firstName"
           >{{ person.firstName + ' ' + person.lastName }}

@@ -2,31 +2,31 @@
 <a mat-raised-button color="primary" [routerLink]="['/..']">Go back</a>
 
 <h2
-  *ngIf="!persons"
+  *ngIf="!person"
   class="lg:w-1/2 mx-auto flex flex-col space-y-4 text-center">
   Sorry, we couldn't find the project you were looking for. It may not exist.
   Please try again.
 </h2>
-<div *ngIf="persons" class="lg:w-1/2 mx-auto flex flex-col space-y-4">
+<div *ngIf="person" class="lg:w-1/2 mx-auto flex flex-col space-y-4">
   <h2>
-    ID: <span>{{ persons.id }}</span>
+    ID: <span>{{ person.id }}</span>
   </h2>
 
   <div class="grid gap-5 grid-flow-row lg:grid-flow-col">
-    <h2 class="inline-block">Last Name:</h2>
-    <p class="inline-block">{{ persons.lastName }}</p>
     <h2>First Name:</h2>
-    <p class="inline-block">{{ persons.firstName }}</p>
+    <p class="inline-block">{{ person.firstName }}</p>
+    <h2 class="inline-block">Last Name:</h2>
+    <p class="inline-block">{{ person.lastName }}</p>
   </div>
   <h2>Job:</h2>
-  <p>{{ persons.job }}</p>
+  <p>{{ person.job }}</p>
   <div
-    *ngIf="persons"
+    *ngIf="person"
     class="grid gap-5 grid-flow-row w-1/2 mt-20 h-28 lg:grid-flow-col">
     <a
       mat-raised-button
       color="primary"
-      [routerLink]="['/person', persons.id, 'update']"
+      [routerLink]="['/person', person.id, 'update']"
       >Update</a
     >
     <button mat-raised-button color="primary" (click)="delete()">Delete</button>

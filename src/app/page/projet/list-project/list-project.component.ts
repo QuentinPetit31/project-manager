@@ -18,7 +18,7 @@ export class ProjectListComponent {
     'description',
     'startDate',
     'endDate',
-    'personnes',
+    'persons',
   ];
 
   get projects() {
