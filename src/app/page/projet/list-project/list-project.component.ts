@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { Person } from '../../../services/person';
 
 @Component({
   selector: 'app-project',
@@ -26,4 +27,12 @@ export class ProjectListComponent {
   }
 
   constructor(private projectService: ProjectService) {}
+
+  displayPersons(persons: Person[]): string {
+    let names: string[] = [];
+    persons.forEach(person => {
+      names.push(person.firstName + ' ' + person.lastName);
+    });
+    return names.join(', ');
+  }
 }

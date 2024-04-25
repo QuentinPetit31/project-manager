@@ -32,18 +32,6 @@ export class DetailProjectComponent implements OnInit {
     console.log('nameProject', nameProject);
     this.project = this.projectService.getProjectByName(nameProject);
     console.log('this.project', this.project);
-
-    if (this.project) {
-      console.log('this.project?.personnes', this.project?.personnes);
-      this.project.personnes.forEach(personId => {
-        console.log(personId);
-        // const person = this.personService.getPersonById(personId);
-        // console.log('person', person);
-        // if (person) {
-        //   this.persons.push(person);
-        // }
-      });
-    }
   }
 
   delete() {

@@ -109,11 +109,11 @@ export class ProjectService {
     }
   }
 
-  delete(name: string): void {
+  delete(id: string): void {
     console.log('delete');
 
     this.httpClient
-      .delete<boolean>('http://localhost:3000/projects/' + name)
+      .delete<boolean>('http://localhost:3000/projects/' + id)
       .subscribe(succes => {
         console.log('refreshProjects projects  =>', succes);
         if (succes) {

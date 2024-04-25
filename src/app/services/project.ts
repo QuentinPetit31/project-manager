@@ -1,8 +1,10 @@
+import { Person } from './person';
+
 export interface Project {
-  id?: string;
+  id?: number;
   name: string;
   description: string;
   startDate: string;
   endDate: string;
-  personnes: string[];
+  persons: Person[];
 }

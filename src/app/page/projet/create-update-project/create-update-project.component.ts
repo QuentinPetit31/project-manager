@@ -20,6 +20,7 @@ import {
   MAT_DATE_LOCALE,
   provideNativeDateAdapter,
 } from '@angular/material/core';
+import { Person } from '../../../services/person';
 
 /**
  * @title Basic Inputs
@@ -51,7 +52,7 @@ export class CreateUpdateProjectComponent implements OnInit {
       Validators.minLength(2),
     ]),
 
-    personnes: new FormControl<string[]>([], [Validators.required]),
+    persons: new FormControl<Person[]>([], [Validators.required]),
 
     startDate: new FormControl<Date>(new Date(), [
       Validators.required,
@@ -97,7 +98,7 @@ export class CreateUpdateProjectComponent implements OnInit {
     if (this.project) {
       this.form.setValue({
         name: this.project.name,
-        personnes: this.project.personnes,
+        persons: this.project.persons,
         // String to date
         startDate: new Date(this.project.startDate),
         endDate: new Date(this.project.endDate),
@@ -118,7 +119,7 @@ export class CreateUpdateProjectComponent implements OnInit {
         startDate: formValue.startDate?.toISOString() || '',
         endDate: formValue.endDate?.toISOString() || '',
         // if / else sur une ligne si ça alors, sinon tab vide
-        personnes: formValue.personnes ? formValue.personnes : [],
+        persons: formValue.persons ? formValue.persons : [],
         description: formValue.description || '',
       };
       if (this.project) {
