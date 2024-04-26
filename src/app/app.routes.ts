@@ -23,8 +23,8 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'project/create', component: CreateUpdateProjectComponent }, // , canActivate: [AuthGuard]
-  { path: 'project/:name', component: DetailProjectComponent }, // , canActivate: [AuthGuard]
-  { path: 'project/:name/update', component: CreateUpdateProjectComponent }, // , canActivate: [AuthGuard]
+  { path: 'project/:id', component: DetailProjectComponent }, // , canActivate: [AuthGuard]
+  { path: 'project/:id/update', component: CreateUpdateProjectComponent }, // , canActivate: [AuthGuard]
 
   { path: 'person', component: PersonListComponent, canActivate: [AuthGuard] },
   { path: 'person/create', component: CreateUpdatePersonComponent }, // , canActivate: [AuthGuard]

@@ -43,6 +43,16 @@ export class ProjectService {
     return projectFind;
   }
 
+  getProjectById(id: number): Project | undefined {
+    let projectFind;
+    for (let i = 0; i < this.projects.length; i++) {
+      if (this.projects[i].id === id) {
+        projectFind = this.projects[i];
+      }
+    }
+    return projectFind;
+  }
+
   createProject(project: Project) {
     let projectNameAlreadyUsed = false;
 

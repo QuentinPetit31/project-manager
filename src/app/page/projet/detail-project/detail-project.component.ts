@@ -23,15 +23,22 @@ export class DetailProjectComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
-    // ajouter personSerbice
+    // ajouter personService
     private personService: PersonService
   ) {}
 
+  // s'il arrive a le recupérer c'est une update sinon c'est une create
   ngOnInit(): void {
-    const nameProject = this.route.snapshot.params['name'];
-    console.log('nameProject', nameProject);
-    this.project = this.projectService.getProjectByName(nameProject);
-    console.log('this.project', this.project);
+    const idProjectString = this.route.snapshot.params['id'];
+    console.log('idPersonString =', idProjectString);
+    //typeof pour visualiser un type
+    console.log('typeof idPersonString', typeof idProjectString);
+
+    const idProject = Number(idProjectString);
+    if (!isNaN(idProject)) {
+      this.project = this.projectService.getProjectById(idProject);
+      console.log('this.persons =', this.project);
+    }
   }
 
   delete() {
