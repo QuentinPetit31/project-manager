@@ -16,7 +16,6 @@ import { MatTableModule } from '@angular/material/table';
 })
 export class DetailProjectComponent implements OnInit {
   project?: Project;
-  persons: Person[] = [];
 
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'job'];
 
@@ -30,14 +29,14 @@ export class DetailProjectComponent implements OnInit {
   // s'il arrive a le recupérer c'est une update sinon c'est une create
   ngOnInit(): void {
     const idProjectString = this.route.snapshot.params['id'];
-    console.log('idPersonString =', idProjectString);
+    console.log('idProjectString =', idProjectString);
     //typeof pour visualiser un type
-    console.log('typeof idPersonString', typeof idProjectString);
+    console.log('typeof idProjectString', typeof idProjectString);
 
     const idProject = Number(idProjectString);
     if (!isNaN(idProject)) {
       this.project = this.projectService.getProjectById(idProject);
-      console.log('this.persons =', this.project);
+      console.log('this.project =', this.project);
     }
   }
 

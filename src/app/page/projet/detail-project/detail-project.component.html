@@ -26,7 +26,7 @@
   <p>{{ project.description }}</p>
   <h2>People who contribute:</h2>
 
-  <table mat-table [dataSource]="persons">
+  <table mat-table [dataSource]="project.persons">
     <!-- Person id Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>id</th>

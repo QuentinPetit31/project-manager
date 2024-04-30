@@ -138,7 +138,7 @@ export class CreateUpdateProjectComponent implements OnInit {
         const newProjectSucces = this.projectService.createProject(project);
         if (newProjectSucces) {
           console.log('Le projet a été ajouté avec succès.');
-          this.router.navigate(['/project']);
+          this.router.navigate(['/project/']);
         } else {
           console.log(
             "Échec de l'ajout du projet. Le nom du projet est déjà utilisé."

@@ -10,6 +10,9 @@ import { CreateUpdateProjectComponent } from './page/projet/create-update-projec
 import { PersonListComponent } from './page/person/list-person/list-person.component';
 import { DetailPersonComponent } from './page/person/detail-person/detail-person.component';
 import { CreateUpdatePersonComponent } from './page/person/create-update-person/create-update-person.component';
+import { JobListComponent } from './page/job/list-job/list-job.component';
+import { CreateUpdateJobComponent } from './page/job/create-update-job/create-update-job.component';
+import { DetailJobComponent } from './page/job/detail-job/detail-job.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -30,6 +33,11 @@ export const routes: Routes = [
   { path: 'person/create', component: CreateUpdatePersonComponent }, // , canActivate: [AuthGuard]
   { path: 'person/:id', component: DetailPersonComponent }, // , canActivate: [AuthGuard]
   { path: 'person/:id/update', component: CreateUpdatePersonComponent }, // , canActivate: [AuthGuard]
+
+  { path: 'job', component: JobListComponent, canActivate: [AuthGuard] },
+  { path: 'job/create', component: CreateUpdateJobComponent }, // , canActivate: [AuthGuard]
+  { path: 'job/:id', component: DetailJobComponent }, // , canActivate: [AuthGuard]
+  { path: 'job/:id/update', component: CreateUpdateJobComponent }, // , canActivate: [AuthGuard]
 
   { path: '**', redirectTo: '' },
 ];

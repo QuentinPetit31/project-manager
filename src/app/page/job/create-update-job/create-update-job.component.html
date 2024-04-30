@@ -1,0 +1,28 @@
+<h1>Create a project</h1>
+<form
+  [formGroup]="form"
+  class="grid lg:grid-cols-2 lg:gap-6 mx-4"
+  (ngSubmit)="submitJob()">
+  <mat-form-field>
+    <mat-label>Job's name</mat-label>
+    <input
+      formControlName="name"
+      matInput
+      placeholder="Ex: Create a website"
+      value="" />
+  </mat-form-field>
+
+  <div class="lg:col-span-2 grid justify-center">
+    <button
+      class="w-80"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!form.valid">
+      Publish a job
+    </button>
+    <p *ngIf="jobNameAlreadyUsed" class="text-red-500 mx-auto">
+      This job's name has already been used.
+    </p>
+  </div>
+</form>

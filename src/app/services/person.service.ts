@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Person } from './person';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -86,5 +86,13 @@ export class PersonService {
           this.router.navigateByUrl('/person');
         }
       });
+  }
+
+  getPersonsByProjectId(projectId: number): Observable<Person[]> {
+    return this.httpClient.get<Person[]>('http://localhost:3000/persons', {
+      params: {
+        projectId: projectId.toString(),
+      },
+    });
   }
 }

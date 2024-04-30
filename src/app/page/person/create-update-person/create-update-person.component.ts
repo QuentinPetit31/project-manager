@@ -9,11 +9,13 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Job, Jobs, Person } from '../../../services/person';
+import { Person } from '../../../services/person';
 import { CommonModule } from '@angular/common';
 import { PersonService } from '../../../services/person.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
+import { Job } from '../../../services/job';
+import { JobService } from '../../../services/job.service';
 
 /**
  * @title Basic Inputs
@@ -43,12 +45,12 @@ export class CreateUpdatePersonComponent implements OnInit {
       Validators.required,
       Validators.minLength(2),
     ]),
-    job: new FormControl<Job>('Intern', [
+    job: new FormControl<Job | undefined>(undefined, [
       Validators.required,
       Validators.minLength(2),
     ]),
   });
-  jobs: Job[] = Jobs;
+  jobs: Job[] = this.jobService.getAllJobs();
   personIdAlreadyUsed = false;
   passwordError = false;
 
@@ -58,7 +60,8 @@ export class CreateUpdatePersonComponent implements OnInit {
   constructor(
     private personService: PersonService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private jobService: JobService
   ) {}
 
   ngOnInit(): void {
@@ -80,15 +83,20 @@ export class CreateUpdatePersonComponent implements OnInit {
 
   submitPerson() {
     console.log('-------------');
-    if (this.form.valid) {
-      // récupère la valeur du form
-      const formValue = this.form.getRawValue();
+    // récupère la valeur du form
+    const formValue = this.form.getRawValue();
+    if (
+      this.form.valid &&
+      formValue.firstName &&
+      formValue.lastName &&
+      formValue.job
+    ) {
       console.log('createPerson formValue = ', formValue);
       const person: Person = {
-        firstName: formValue.firstName || '',
-        lastName: formValue.lastName || '',
+        firstName: formValue.firstName,
+        lastName: formValue.lastName,
         // if / else sur une ligne si ça alors, sinon tab vide
-        job: formValue.job || 'Intern',
+        job: formValue.job,
       };
       if (this.person) {
         person.id = this.person.id;

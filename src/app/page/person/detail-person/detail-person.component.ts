@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { Person } from '../../../services/person';
 import { PersonService } from '../../../services/person.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-detail-project',
