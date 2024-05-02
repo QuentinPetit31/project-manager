@@ -19,7 +19,7 @@
     <p class="inline-block">{{ person.lastName }}</p>
   </div>
   <h2>Job:</h2>
-  <p>{{ person.job }}</p>
+  <p>{{ person.job.name }}</p>
   <div
     *ngIf="person"
     class="grid gap-5 grid-flow-row w-1/2 mt-20 h-28 lg:grid-flow-col">
