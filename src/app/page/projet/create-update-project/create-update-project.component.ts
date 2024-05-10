@@ -83,29 +83,44 @@ export class CreateUpdateProjectComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private router: Router,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private personService: PersonService
   ) {}
 
   ngOnInit(): void {
-    const nameProject = this.route.snapshot.params['name'];
-    console.log(nameProject);
-    this.project = this.projectService.getProjectByName(nameProject);
-    console.log(this.project);
-
-    // this.form.controls.name.setValue()
+    const data = this.activatedRoute.snapshot.data;
+    this.project = data['project'];
 
     if (this.project) {
       this.form.setValue({
         name: this.project.name,
         persons: this.project.persons,
-        // String to date
         startDate: new Date(this.project.startDate),
         endDate: new Date(this.project.endDate),
         description: this.project.description,
       });
     }
   }
+
+  // ngOnInit(): void {
+  //   const idProject = this.route.snapshot.params['id'];
+  //   console.log(idProject);
+  //   this.project = this.projectService.getProjectById(idProject);
+  //   console.log(this.project);
+
+  //   // this.form.controls.name.setValue()
+
+  //   if (this.project) {
+  //     this.form.setValue({
+  //       name: this.project.name,
+  //       persons: this.project.persons,
+  //       // String to date
+  //       startDate: new Date(this.project.startDate),
+  //       endDate: new Date(this.project.endDate),
+  //       description: this.project.description,
+  //     });
+  //   }
+  // }
 
   submitProject() {
     console.log('-------------');

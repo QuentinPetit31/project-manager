@@ -17,9 +17,9 @@
   <h2>Project: {{ project.name }}</h2>
   <div class="grid gap-5 grid-flow-row lg:grid-flow-col">
     <h2 class="inline-block">Start date:</h2>
-    <p class="inline-block">{{ project.startDate }}</p>
+    <p class="inline-block">{{ project.startDate | date }}</p>
     <h2>End date:</h2>
-    <p class="inline-block">{{ project.endDate }}</p>
+    <p class="inline-block">{{ project.endDate | date }}</p>
   </div>
 
   <h2>Descritption:</h2>
@@ -48,7 +48,7 @@
     <!-- job Column -->
     <ng-container matColumnDef="job">
       <th mat-header-cell *matHeaderCellDef>Job</th>
-      <td mat-cell *matCellDef="let person">{{ person.job }}</td>
+      <td mat-cell *matCellDef="let person">{{ person.job.name }}</td>
     </ng-container>
 
     <!-- Define columns -->
