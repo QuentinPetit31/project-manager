@@ -48,14 +48,8 @@ export class PersonService {
     return true;
   }
 
-  getPersonById(id: number): Person | undefined {
-    let personFind;
-    for (let i = 0; i < this.persons.length; i++) {
-      if (this.persons[i].id === id) {
-        personFind = this.persons[i];
-      }
-    }
-    return personFind;
+  getPersonById(id: string) {
+    return this.httpClient.get<Person>('http://localhost:3000/persons/' + id);
   }
 
   updatePerson(person: Person) {

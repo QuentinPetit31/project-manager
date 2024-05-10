@@ -16,23 +16,25 @@ export class DetailPersonComponent implements OnInit {
   person?: Person;
 
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private personService: PersonService,
     private router: Router
   ) {}
 
   // s'il arrive a le recupérer c'est une update sinon c'est une create
   ngOnInit(): void {
-    const idPersonString = this.route.snapshot.params['id'];
-    console.log('idPersonString =', idPersonString);
-    //typeof pour visualiser un type
-    console.log('typeof idPersonString', typeof idPersonString);
+    // const idPersonString = this.route.snapshot.params['id'];
+    // console.log('idPersonString =', idPersonString);
+    // //typeof pour visualiser un type
+    // console.log('typeof idPersonString', typeof idPersonString);
 
-    const idPerson = Number(idPersonString);
-    if (!isNaN(idPerson)) {
-      this.person = this.personService.getPersonById(idPerson);
-      console.log('this.persons =', this.person);
-    }
+    // const idPerson = Number(idPersonString);
+    // if (!isNaN(idPerson)) {
+    //   this.person = this.personService.getPersonById(idPerson);
+    //   console.log('this.persons =', this.person);
+    // }
+    const data = this.activatedRoute.snapshot.data;
+    this.person = data['person'];
   }
 
   delete() {

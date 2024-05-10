@@ -18,23 +18,25 @@ export class DetailJobComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name'];
 
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     // ajouter JobService
     private jobService: JobService
   ) {}
 
   // s'il arrive a le recupérer c'est une update sinon c'est une create
   ngOnInit(): void {
-    const idJobString = this.route.snapshot.params['id'];
-    console.log('idJobString =', idJobString);
-    //typeof pour visualiser un type
-    console.log('typeof idJobString', typeof idJobString);
+    // const idPersonString = this.route.snapshot.params['id'];
+    // console.log('idPersonString =', idPersonString);
+    // //typeof pour visualiser un type
+    // console.log('typeof idPersonString', typeof idPersonString);
 
-    const idJob = Number(idJobString);
-    if (!isNaN(idJob)) {
-      this.job = this.jobService.getJobById(idJob);
-      console.log('this.job =', this.job);
-    }
+    // const idPerson = Number(idPersonString);
+    // if (!isNaN(idPerson)) {
+    //   this.person = this.personService.getPersonById(idPerson);
+    //   console.log('this.persons =', this.person);
+    // }
+    const data = this.activatedRoute.snapshot.data;
+    this.job = data['job'];
   }
 
   delete() {

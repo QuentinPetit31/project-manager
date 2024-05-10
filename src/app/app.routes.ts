@@ -13,6 +13,12 @@ import { CreateUpdatePersonComponent } from './page/person/create-update-person/
 import { JobListComponent } from './page/job/list-job/list-job.component';
 import { CreateUpdateJobComponent } from './page/job/create-update-job/create-update-job.component';
 import { DetailJobComponent } from './page/job/detail-job/detail-job.component';
+import { jobResolver } from './resolver/job.resolver';
+import { jobsResolver } from './resolver/jobs.resolver';
+import { projectResolver } from './resolver/project.resolver';
+import { projectsResolver } from './resolver/projects.resolver';
+import { personsResolver } from './resolver/persons.resolver';
+import { personResolver } from './resolver/person.resolver';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -24,20 +30,60 @@ export const routes: Routes = [
     path: 'project',
     component: ProjectListComponent,
     canActivate: [AuthGuard],
+    resolve: { projects: projectsResolver },
   },
+
   { path: 'project/create', component: CreateUpdateProjectComponent }, // , canActivate: [AuthGuard]
-  { path: 'project/:id', component: DetailProjectComponent }, // , canActivate: [AuthGuard]
-  { path: 'project/:id/update', component: CreateUpdateProjectComponent }, // , canActivate: [AuthGuard]
 
-  { path: 'person', component: PersonListComponent, canActivate: [AuthGuard] },
+  {
+    path: 'project/:id',
+    component: DetailProjectComponent,
+    resolve: { project: projectResolver },
+  }, // , canActivate: [AuthGuard]
+
+  {
+    path: 'project/:id/update',
+    component: CreateUpdateProjectComponent,
+    resolve: { project: projectResolver }, //persons: personsResolver
+  }, // , canActivate: [AuthGuard]
+
+  {
+    path: 'person',
+    component: PersonListComponent,
+    canActivate: [AuthGuard],
+    resolve: { persons: personsResolver },
+  },
   { path: 'person/create', component: CreateUpdatePersonComponent }, // , canActivate: [AuthGuard]
-  { path: 'person/:id', component: DetailPersonComponent }, // , canActivate: [AuthGuard]
-  { path: 'person/:id/update', component: CreateUpdatePersonComponent }, // , canActivate: [AuthGuard]
 
-  { path: 'job', component: JobListComponent, canActivate: [AuthGuard] },
+  {
+    path: 'person/:id',
+    component: DetailPersonComponent,
+    resolve: { person: personResolver },
+  }, // , canActivate: [AuthGuard]
+
+  {
+    path: 'person/:id/update',
+    component: CreateUpdatePersonComponent,
+    resolve: { person: personResolver },
+  }, // , canActivate: [AuthGuard]
+
+  {
+    path: 'job',
+    component: JobListComponent,
+    resolve: { jobs: jobsResolver },
+    canActivate: [AuthGuard],
+  },
   { path: 'job/create', component: CreateUpdateJobComponent }, // , canActivate: [AuthGuard]
-  { path: 'job/:id', component: DetailJobComponent }, // , canActivate: [AuthGuard]
-  { path: 'job/:id/update', component: CreateUpdateJobComponent }, // , canActivate: [AuthGuard]
+  {
+    path: 'job/:id',
+    component: DetailJobComponent,
+    resolve: { job: jobResolver },
+  }, // , canActivate: [AuthGuard]
+  {
+    path: 'job/:id/update',
+    component: CreateUpdateJobComponent,
+    resolve: { job: jobResolver },
+  }, // , canActivate: [AuthGuard]
 
   { path: '**', redirectTo: '' },
 ];

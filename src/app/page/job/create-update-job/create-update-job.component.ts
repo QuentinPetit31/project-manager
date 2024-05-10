@@ -10,7 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ResolveFn, Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
@@ -60,15 +60,16 @@ export class CreateUpdateJobComponent implements OnInit {
   constructor(
     private jobService: JobService,
     private router: Router,
-    private route: ActivatedRoute
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    const idJob = this.route.snapshot.params['id'];
-    console.log(idJob);
-    this.job = this.jobService.getJobById(idJob);
-    console.log(this.job);
-
+    // const idJob = this.route.snapshot.params['id'];
+    // console.log(idJob);
+    // this.job = this.jobService.getJobById(idJob);
+    // console.log(this.job);
+    const data = this.activatedRoute.snapshot.data;
+    this.job = data['job'];
     // this.form.controls.id.setValue()
 
     if (this.job) {

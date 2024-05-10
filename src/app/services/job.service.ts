@@ -20,9 +20,11 @@ export class JobService {
     this.refreshJobs();
   }
 
-  getAllJobs(): Job[] {
+  getAllJobs(): Observable<Job[]> {
     console.log('getAllJobs', this.jobs);
-    return this.jobs;
+    console.log('refreshJobs');
+
+    return this.httpClient.get<Job[]>('http://localhost:3000/jobs');
   }
 
   refreshJobs(): void {
@@ -48,14 +50,8 @@ export class JobService {
     return true;
   }
 
-  getJobById(id: number): Job | undefined {
-    let jobFind;
-    for (let i = 0; i < this.jobs.length; i++) {
-      if (this.jobs[i].id === id) {
-        jobFind = this.jobs[i];
-      }
-    }
-    return jobFind;
+  getJobById(id: string) {
+    return this.httpClient.get<Job>('http://localhost:3000/jobs/' + id);
   }
 
   updateJob(job: Job) {
@@ -85,8 +81,6 @@ export class JobService {
         }
       });
   }
-
-  //A VERIFIER
 
   getJobByProjectId(projectId: number): Observable<Person[]> {
     return this.httpClient.get<Person[]>('http://localhost:3000/jobs', {

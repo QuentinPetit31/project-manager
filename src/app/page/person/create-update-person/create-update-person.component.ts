@@ -50,7 +50,7 @@ export class CreateUpdatePersonComponent implements OnInit {
       Validators.minLength(2),
     ]),
   });
-  jobs: Job[] = this.jobService.getAllJobs();
+  jobs?: Job[];
   personIdAlreadyUsed = false;
   passwordError = false;
 
@@ -60,17 +60,22 @@ export class CreateUpdatePersonComponent implements OnInit {
   constructor(
     private personService: PersonService,
     private router: Router,
-    private route: ActivatedRoute,
-    private jobService: JobService
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    jobService: JobService
+  ) {
+    jobService
+      .getAllJobs()
+      .toPromise()
+      .then(jobs => {
+        if (jobs) {
+          this.jobs = jobs;
+        }
+      });
+  }
 
   ngOnInit(): void {
-    const idPersons = this.route.snapshot.params['id'];
-    console.log(idPersons);
-    this.person = this.personService.getPersonById(idPersons);
-    console.log(this.person);
-
-    // this.form.controls.id.setValue()
+    const data = this.activatedRoute.snapshot.data;
+    this.person = data['person'];
 
     if (this.person) {
       this.form.setValue({

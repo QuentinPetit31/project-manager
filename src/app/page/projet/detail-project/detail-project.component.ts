@@ -4,8 +4,6 @@ import { Project } from '../../../services/project';
 import { ProjectService } from '../../../services/project.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { PersonService } from '../../../services/person.service';
-import { Person } from '../../../services/person';
 import { MatTableModule } from '@angular/material/table';
 
 @Component({
@@ -20,24 +18,25 @@ export class DetailProjectComponent implements OnInit {
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'job'];
 
   constructor(
-    private route: ActivatedRoute,
-    private projectService: ProjectService,
+    private activatedRoute: ActivatedRoute,
+    private projectService: ProjectService
     // ajouter personService
-    private personService: PersonService
   ) {}
 
   // s'il arrive a le recupérer c'est une update sinon c'est une create
   ngOnInit(): void {
-    const idProjectString = this.route.snapshot.params['id'];
-    console.log('idProjectString =', idProjectString);
-    //typeof pour visualiser un type
-    console.log('typeof idProjectString', typeof idProjectString);
+    // const idProjectString = this.route.snapshot.params['id'];
+    // console.log('idProjectString =', idProjectString);
+    // //typeof pour visualiser un type
+    // console.log('typeof idProjectString', typeof idProjectString);
 
-    const idProject = Number(idProjectString);
-    if (!isNaN(idProject)) {
-      this.project = this.projectService.getProjectById(idProject);
-      console.log('this.project =', this.project);
-    }
+    // const idProject = Number(idProjectString);
+    // if (!isNaN(idProject)) {
+    //   this.project = this.projectService.getProjectById(idProject);
+    //   console.log('this.project =', this.project);
+    // }
+    const data = this.activatedRoute.snapshot.data;
+    this.project = data['project'];
   }
 
   delete() {
