@@ -75,21 +75,22 @@ export class CreateUpdateProjectComponent implements OnInit {
 
   project?: Project;
 
-  get persons() {
-    return this.personService.getAllPersons();
-  }
+  // get persons() {
+  //   return this.personService.getAllPersons();
+  // }
+  persons!: Person[];
 
   // import project service
   constructor(
     private projectService: ProjectService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private personService: PersonService
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     const data = this.activatedRoute.snapshot.data;
     this.project = data['project'];
+    this.persons = data['persons'];
 
     if (this.project) {
       this.form.setValue({
@@ -101,26 +102,6 @@ export class CreateUpdateProjectComponent implements OnInit {
       });
     }
   }
-
-  // ngOnInit(): void {
-  //   const idProject = this.route.snapshot.params['id'];
-  //   console.log(idProject);
-  //   this.project = this.projectService.getProjectById(idProject);
-  //   console.log(this.project);
-
-  //   // this.form.controls.name.setValue()
-
-  //   if (this.project) {
-  //     this.form.setValue({
-  //       name: this.project.name,
-  //       persons: this.project.persons,
-  //       // String to date
-  //       startDate: new Date(this.project.startDate),
-  //       endDate: new Date(this.project.endDate),
-  //       description: this.project.description,
-  //     });
-  //   }
-  // }
 
   submitProject() {
     console.log('-------------');

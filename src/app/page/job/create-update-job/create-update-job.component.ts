@@ -91,26 +91,16 @@ export class CreateUpdateJobComponent implements OnInit {
       if (this.job) {
         // UPDATE
         job.id = this.job.id;
-        const updateJobSucces = this.jobService.updateJob(job);
-        if (updateJobSucces) {
-          console.log('Le job a été modifié avec succès.');
+        console.log('update job=', job);
+        this.jobService.updateJob(job).subscribe(() => {
           this.router.navigate(['/job']);
-        }
+        });
       } else {
         // CREATE
         // Appel de la méthode createJob du service
-        const newJobSucces = this.jobService.createJob(job);
-        if (newJobSucces) {
-          console.log('Le job a été ajouté avec succès.');
-          this.router.navigate(['/job/']);
-        } else {
-          console.log(
-            "Échec de l'ajout du job. Le nom du job est déjà utilisé."
-          );
-          //afficher erreur en rouge sous le bouton
-          //si erreur message sous bouton
-          this.jobNameAlreadyUsed = true;
-        }
+        this.jobService.createJob(job).subscribe(() => {
+          this.router.navigate(['/job']);
+        });
       }
     }
   }

@@ -104,31 +104,18 @@ export class CreateUpdatePersonComponent implements OnInit {
         job: formValue.job,
       };
       if (this.person) {
-        person.id = this.person.id;
         // UPDATE
-        this.personService.updatePerson(person).subscribe(sucess => {
-          if (sucess) {
-            console.log('modification de person finalisée');
-            this.router.navigate(['/person']);
-          } else {
-            // ERROR
-          }
+        person.id = this.person.id;
+        console.log('update person=', person);
+        this.personService.updatePerson(person).subscribe(() => {
+          this.router.navigate(['/person']);
         });
       } else {
         // CREATE
-        // Appel de la méthode createProject du service
-        const newPersonSucces = this.personService.createPerson(person);
-        if (newPersonSucces) {
-          console.log('La personne a été ajoutée avec succès.');
+        // Appel de la méthode createPerson du service
+        this.personService.createPerson(person).subscribe(() => {
           this.router.navigate(['/person']);
-        } else {
-          console.log(
-            "Échec de l'ajout du projet. Le nom du projet est déjà utilisé."
-          );
-          //afficher erreur en rouge sous le bouton
-          //si erreur message sous bouton
-          this.personIdAlreadyUsed = true;
-        }
+        });
       }
     }
   }

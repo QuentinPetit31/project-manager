@@ -38,7 +38,7 @@ export const routes: Routes = [
   {
     path: 'project/:id',
     component: DetailProjectComponent,
-    resolve: { project: projectResolver },
+    resolve: { project: projectResolver, job: jobResolver },
   }, // , canActivate: [AuthGuard]
 
   {
@@ -58,7 +58,7 @@ export const routes: Routes = [
   {
     path: 'person/:id',
     component: DetailPersonComponent,
-    resolve: { person: personResolver },
+    resolve: { person: personResolver, job: jobResolver },
   }, // , canActivate: [AuthGuard]
 
   {

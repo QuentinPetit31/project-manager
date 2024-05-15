@@ -15,37 +15,17 @@ export class PersonService {
   constructor(
     private httpClient: HttpClient,
     private router: Router
-  ) {
-    this.refreshPersons();
+  ) {}
+
+  getAllPersons(): Observable<Person[]> {
+    return this.httpClient.get<Person[]>('http://localhost:3000/persons');
   }
 
-  getAllPersons(): Person[] {
-    return this.persons;
-  }
-
-  refreshPersons(): void {
-    console.log('refreshPersons');
-
-    this.httpClient
-      .get<Person[]>('http://localhost:3000/persons')
-      .subscribe(persons => {
-        console.log('refreshProjects projects  =>', persons);
-        this.persons = persons;
-      });
-  }
-
-  createPerson(newPerson: Person): boolean {
-    this.httpClient
-      .post<boolean>('http://localhost:3000/persons', newPerson)
-      .subscribe(isSuccess => {
-        if (isSuccess) {
-          console.log('createPerson success', newPerson);
-          this.refreshPersons();
-        } else {
-          console.log('createPerson error', newPerson);
-        }
-      });
-    return true;
+  createPerson(newPerson: Person) {
+    return this.httpClient.post<boolean>(
+      'http://localhost:3000/persons',
+      newPerson
+    );
   }
 
   getPersonById(id: string) {
@@ -53,34 +33,31 @@ export class PersonService {
   }
 
   updatePerson(person: Person) {
-    // ajouter un project à la liste des projects
-    // this.projects.push(person);
-    return this.httpClient
-      .put<boolean>('http://localhost:3000/persons/', person)
-      .pipe(
-        tap(sucess => {
-          if (sucess) {
-            console.log('modification de person finalisée');
-            // verifier ce qu'il y a dans le tableau après inscription (sans renouveler la page)
-            this.refreshPersons();
-          }
-        })
-      );
+    return this.httpClient.put<boolean>(
+      'http://localhost:3000/persons/',
+      person
+    );
   }
 
-  delete(id: number): void {
+  delete(id: number) {
     console.log('delete');
 
-    this.httpClient
-      .delete<boolean>('http://localhost:3000/persons/' + id)
-      .subscribe(succes => {
-        console.log('refreshProjects persons  =>', succes);
-        if (succes) {
-          this.refreshPersons();
-          this.router.navigateByUrl('/person');
-        }
-      });
+    return this.httpClient.delete<void>('http://localhost:3000/persons/' + id);
   }
+
+  // delete(id: number): void {
+  //   console.log('delete');
+
+  //   this.httpClient
+  //     .delete<boolean>('http://localhost:3000/persons/' + id)
+  //     .subscribe(succes => {
+  //       console.log('refreshProjects persons  =>', succes);
+  //       if (succes) {
+  //         this.refreshPersons();
+  //         this.router.navigateByUrl('/person');
+  //       }
+  //     });
+  // }
 
   getPersonsByProjectId(projectId: number): Observable<Person[]> {
     return this.httpClient.get<Person[]>('http://localhost:3000/persons', {

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PersonService } from '../../../services/person.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
+import { Person } from '../../../services/person';
 
 @Component({
   selector: 'app-person',
@@ -14,9 +15,16 @@ import { MatTableModule } from '@angular/material/table';
 export class PersonListComponent {
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'job'];
 
-  get persons() {
-    return this.personService.getAllPersons();
-  }
+  // get persons() {
+  //   return this.personService.getAllPersons();
+  // }
+  persons!: Person[];
 
-  constructor(private personService: PersonService) {}
+  constructor(private activatedRoute: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    const data = this.activatedRoute.snapshot.data;
+    this.persons = data['persons'];
+    console.log('persons', this.persons);
+  }
 }

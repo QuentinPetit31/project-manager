@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { Person } from '../../../services/person';
 import { PersonService } from '../../../services/person.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-detail-project',
@@ -23,24 +22,15 @@ export class DetailPersonComponent implements OnInit {
 
   // s'il arrive a le recupérer c'est une update sinon c'est une create
   ngOnInit(): void {
-    // const idPersonString = this.route.snapshot.params['id'];
-    // console.log('idPersonString =', idPersonString);
-    // //typeof pour visualiser un type
-    // console.log('typeof idPersonString', typeof idPersonString);
-
-    // const idPerson = Number(idPersonString);
-    // if (!isNaN(idPerson)) {
-    //   this.person = this.personService.getPersonById(idPerson);
-    //   console.log('this.persons =', this.person);
-    // }
     const data = this.activatedRoute.snapshot.data;
     this.person = data['person'];
   }
 
   delete() {
-    if (this.person && this.person.id) {
-      this.personService.delete(this.person.id);
+    if (this.person?.id) {
+      this.personService.delete(this.person.id).subscribe(() => {
+        this.router.navigateByUrl('/person');
+      });
     }
-    this.router.navigateByUrl('/person');
   }
 }
