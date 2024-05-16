@@ -15,9 +15,6 @@ import { Person } from '../../../services/person';
 export class PersonListComponent {
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'job'];
 
-  // get persons() {
-  //   return this.personService.getAllPersons();
-  // }
   persons!: Person[];
 
   constructor(private activatedRoute: ActivatedRoute) {}
@@ -25,6 +22,5 @@ export class PersonListComponent {
   ngOnInit(): void {
     const data = this.activatedRoute.snapshot.data;
     this.persons = data['persons'];
-    console.log('persons', this.persons);
   }
 }

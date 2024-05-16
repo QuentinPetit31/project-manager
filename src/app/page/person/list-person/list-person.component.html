@@ -1,4 +1,11 @@
-<h1>Person</h1>
+<h1>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" /><span
+    class="material-symbols-outlined">
+    settings_account_box </span
+  >Person
+</h1>
 
 <a mat-raised-button color="primary" [routerLink]="['/home']">
   Back to the homepage
@@ -38,7 +45,7 @@
     [routerLink]="['/person', row.id]"
     class="cursor-pointer hover:bg-gray-200"></tr>
 </table>
-<div class="grid grid-flow-row w-1/2 mx-auto my-12 lg:grid-flow-col">
+<div class="grid grid-flow-row w-1/2 mx-auto my-16 lg:grid-flow-col">
   <a mat-raised-button color="primary" [routerLink]="['/person/create']"
     >Add a person</a
   >

@@ -1,4 +1,11 @@
-<h1>{{ job ? 'Update a job' : 'Create a job' }}</h1>
+<h1>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" /><span
+    class="material-symbols-outlined">
+    work_update </span
+  >{{ job ? 'Update a job' : 'Create a job' }}
+</h1>
 <form
   [formGroup]="form"
   class="grid lg:grid-cols-2 lg:gap-6 mx-4"

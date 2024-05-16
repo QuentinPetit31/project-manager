@@ -14,7 +14,6 @@ import { CommonModule } from '@angular/common';
 import { ProjectService } from '../../../services/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
-import { PersonService } from '../../../services/person.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
   MAT_DATE_LOCALE,
@@ -75,9 +74,6 @@ export class CreateUpdateProjectComponent implements OnInit {
 
   project?: Project;
 
-  // get persons() {
-  //   return this.personService.getAllPersons();
-  // }
   persons!: Person[];
 
   // import project service
@@ -103,6 +99,11 @@ export class CreateUpdateProjectComponent implements OnInit {
     }
   }
 
+  //Sert a gerer la comparaison entre deux person pour afficher les persons d'un proj
+  comparePerson(obj1: Person, obj2: Person) {
+    return obj1.id === obj2.id;
+  }
+
   submitProject() {
     console.log('-------------');
     if (this.form.valid) {
@@ -120,29 +121,17 @@ export class CreateUpdateProjectComponent implements OnInit {
       };
       if (this.project) {
         // UPDATE
-        const updateProjectSucces = this.projectService.updateProject(
-          this.project.name,
-          project
-        );
-        if (updateProjectSucces) {
-          console.log('Le projet a été modifié avec succès.');
+        project.id = this.project.id;
+        console.log('update person=', project);
+        this.projectService.updateProject(project).subscribe(() => {
           this.router.navigate(['/project']);
-        }
+        });
       } else {
         // CREATE
         // Appel de la méthode createProject du service
-        const newProjectSucces = this.projectService.createProject(project);
-        if (newProjectSucces) {
-          console.log('Le projet a été ajouté avec succès.');
-          this.router.navigate(['/project/']);
-        } else {
-          console.log(
-            "Échec de l'ajout du projet. Le nom du projet est déjà utilisé."
-          );
-          //afficher erreur en rouge sous le bouton
-          //si erreur message sous bouton
-          this.projectNameAlreadyUsed = true;
-        }
+        this.projectService.createProject(project).subscribe(() => {
+          this.router.navigate(['/project']);
+        });
       }
     }
   }

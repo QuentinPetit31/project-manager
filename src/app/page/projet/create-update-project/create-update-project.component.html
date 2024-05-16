@@ -1,4 +1,12 @@
-<h1>Create a project</h1>
+<h1>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" /><span
+    class="material-symbols-outlined">
+    update
+  </span>
+  {{ project ? 'Update a project' : 'Create a project' }}
+</h1>
 <form
   [formGroup]="form"
   class="grid lg:grid-cols-2 lg:gap-6 mx-4"
@@ -14,14 +22,21 @@
 
   <mat-form-field>
     <mat-label>Project's contributors</mat-label>
-    <mat-select formControlName="persons" multiple>
+    <mat-select
+      [compareWith]="comparePerson"
+      formControlName="persons"
+      multiple>
       @for (person of persons; track person) {
-        <mat-option [value]="person.firstName"
+        <mat-option [value]="person"
           >{{ person.firstName + ' ' + person.lastName }}
         </mat-option>
       }
     </mat-select>
   </mat-form-field>
+
+  <!-- <div>persons = {{ persons | json }}</div>
+  -------------------------------------
+  <div>persons du proj = {{ project?.persons | json }}</div> -->
 
   <mat-form-field class="example-form-field">
     <mat-label>Project's range</mat-label>

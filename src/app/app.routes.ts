@@ -33,18 +33,22 @@ export const routes: Routes = [
     resolve: { projects: projectsResolver },
   },
 
-  { path: 'project/create', component: CreateUpdateProjectComponent }, // , canActivate: [AuthGuard]
+  {
+    path: 'project/create',
+    component: CreateUpdateProjectComponent,
+    resolve: { persons: personsResolver },
+  }, // , canActivate: [AuthGuard]
 
   {
     path: 'project/:id',
     component: DetailProjectComponent,
-    resolve: { project: projectResolver, job: jobResolver },
+    resolve: { project: projectResolver },
   }, // , canActivate: [AuthGuard]
 
   {
     path: 'project/:id/update',
     component: CreateUpdateProjectComponent,
-    resolve: { project: projectResolver }, //persons: personsResolver
+    resolve: { project: projectResolver, persons: personsResolver }, //persons: personsResolver
   }, // , canActivate: [AuthGuard]
 
   {
@@ -53,18 +57,22 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     resolve: { persons: personsResolver },
   },
-  { path: 'person/create', component: CreateUpdatePersonComponent }, // , canActivate: [AuthGuard]
+  {
+    path: 'person/create',
+    component: CreateUpdatePersonComponent,
+    resolve: { jobs: jobsResolver },
+  }, // , canActivate: [AuthGuard]
 
   {
     path: 'person/:id',
     component: DetailPersonComponent,
-    resolve: { person: personResolver, job: jobResolver },
+    resolve: { person: personResolver },
   }, // , canActivate: [AuthGuard]
 
   {
     path: 'person/:id/update',
     component: CreateUpdatePersonComponent,
-    resolve: { person: personResolver },
+    resolve: { person: personResolver, jobs: jobsResolver },
   }, // , canActivate: [AuthGuard]
 
   {

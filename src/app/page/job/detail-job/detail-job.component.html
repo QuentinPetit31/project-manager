@@ -1,4 +1,11 @@
-<h1>Detail Job</h1>
+<h1>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" /><span
+    class="material-symbols-outlined">
+    work </span
+  >Detail Job
+</h1>
 <a mat-raised-button color="primary" [routerLink]="['/job']"
   >Back to job-list</a
 >
@@ -14,9 +21,7 @@
   </h2>
   <h2>Name: {{ job.name }}</h2>
 
-  <div
-    *ngIf="job"
-    class="grid gap-5 grid-flow-row w-1/2 mt-20 h-28 lg:grid-flow-col">
+  <div *ngIf="job" class="grid gap-5 grid-flow-row mt-20 h-28 lg:grid-flow-col">
     <a
       mat-raised-button
       color="primary"

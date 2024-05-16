@@ -15,7 +15,6 @@ import { PersonService } from '../../../services/person.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { Job } from '../../../services/job';
-import { JobService } from '../../../services/job.service';
 
 /**
  * @title Basic Inputs
@@ -60,22 +59,13 @@ export class CreateUpdatePersonComponent implements OnInit {
   constructor(
     private personService: PersonService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    jobService: JobService
-  ) {
-    jobService
-      .getAllJobs()
-      .toPromise()
-      .then(jobs => {
-        if (jobs) {
-          this.jobs = jobs;
-        }
-      });
-  }
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     const data = this.activatedRoute.snapshot.data;
     this.person = data['person'];
+    this.jobs = data['jobs'];
 
     if (this.person) {
       this.form.setValue({

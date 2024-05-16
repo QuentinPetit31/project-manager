@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { ProjectService } from '../../../services/project.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { Person } from '../../../services/person';
+import { Project } from '../../../services/project';
 
 @Component({
   selector: 'app-project',
@@ -13,6 +14,7 @@ import { Person } from '../../../services/person';
   templateUrl: './list-project.component.html',
 })
 export class ProjectListComponent {
+  projects!: Project[];
   displayedColumns: string[] = [
     'id',
     'name',
@@ -22,11 +24,14 @@ export class ProjectListComponent {
     'persons',
   ];
 
-  get projects() {
-    return this.projectService.getAllProjects();
-  }
+  constructor(private activatedRoute: ActivatedRoute) {}
 
-  constructor(private projectService: ProjectService) {}
+  ngOnInit(): void {
+    const data = this.activatedRoute.snapshot.data;
+    console.log('data', data);
+
+    this.projects = data['projects'];
+  }
 
   displayPersons(persons: Person[]): string {
     let names: string[] = [];

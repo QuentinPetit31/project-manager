@@ -64,10 +64,6 @@ export class CreateUpdateJobComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // const idJob = this.route.snapshot.params['id'];
-    // console.log(idJob);
-    // this.job = this.jobService.getJobById(idJob);
-    // console.log(this.job);
     const data = this.activatedRoute.snapshot.data;
     this.job = data['job'];
     // this.form.controls.id.setValue()

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Project } from '../../../services/project';
 import { ProjectService } from '../../../services/project.service';
 import { CommonModule } from '@angular/common';
@@ -19,29 +19,21 @@ export class DetailProjectComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private projectService: ProjectService
-    // ajouter personService
+    private projectService: ProjectService,
+    private router: Router
   ) {}
 
-  // s'il arrive a le recupérer c'est une update sinon c'est une create
   ngOnInit(): void {
-    // const idProjectString = this.route.snapshot.params['id'];
-    // console.log('idProjectString =', idProjectString);
-    // //typeof pour visualiser un type
-    // console.log('typeof idProjectString', typeof idProjectString);
-
-    // const idProject = Number(idProjectString);
-    // if (!isNaN(idProject)) {
-    //   this.project = this.projectService.getProjectById(idProject);
-    //   console.log('this.project =', this.project);
-    // }
+    // s'il arrive a le recupérer c'est une update sinon c'est une create
     const data = this.activatedRoute.snapshot.data;
     this.project = data['project'];
   }
-
   delete() {
-    if (this.project) {
-      this.projectService.delete(this.project.name);
+    console.log('project=', this.project);
+    if (this.project?.id) {
+      this.projectService.delete(this.project.id).subscribe(() => {
+        this.router.navigateByUrl('/project');
+      });
     }
   }
 }

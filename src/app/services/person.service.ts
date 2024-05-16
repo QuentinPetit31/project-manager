@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Person } from './person';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -44,20 +44,6 @@ export class PersonService {
 
     return this.httpClient.delete<void>('http://localhost:3000/persons/' + id);
   }
-
-  // delete(id: number): void {
-  //   console.log('delete');
-
-  //   this.httpClient
-  //     .delete<boolean>('http://localhost:3000/persons/' + id)
-  //     .subscribe(succes => {
-  //       console.log('refreshProjects persons  =>', succes);
-  //       if (succes) {
-  //         this.refreshPersons();
-  //         this.router.navigateByUrl('/person');
-  //       }
-  //     });
-  // }
 
   getPersonsByProjectId(projectId: number): Observable<Person[]> {
     return this.httpClient.get<Person[]>('http://localhost:3000/persons', {
