@@ -1,16 +1,22 @@
 import { Component } from '@angular/core';
-import { ProjectService } from '../../../services/project.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { Person } from '../../../services/person';
 import { Project } from '../../../services/project';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-project',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatTableModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './list-project.component.html',
 })
 export class ProjectListComponent {

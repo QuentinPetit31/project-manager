@@ -72,6 +72,7 @@ export class LoginComponent {
       }
     }
   }
+
   redirectToEnrollPage() {
     this.router.navigate(['/enroll']);
   }

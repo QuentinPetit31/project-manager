@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { Person } from '../../../services/person';
 import { PersonService } from '../../../services/person.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-detail-project',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, RouterModule],
+  imports: [CommonModule, MatButtonModule, RouterModule, MatIconModule],
   templateUrl: './detail-person.component.html',
 })
 export class DetailPersonComponent implements OnInit {

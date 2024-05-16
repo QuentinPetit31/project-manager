@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-exercice',
   standalone: true,
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './exercice.component.html',
 })
 export class ExerciceComponent {

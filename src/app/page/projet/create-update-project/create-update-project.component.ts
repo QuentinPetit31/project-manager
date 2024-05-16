@@ -20,6 +20,7 @@ import {
   provideNativeDateAdapter,
 } from '@angular/material/core';
 import { Person } from '../../../services/person';
+import { MatIconModule } from '@angular/material/icon';
 
 /**
  * @title Basic Inputs
@@ -42,6 +43,7 @@ import { Person } from '../../../services/person';
     CommonModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatIconModule,
   ],
 })
 export class CreateUpdateProjectComponent implements OnInit {

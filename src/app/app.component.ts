@@ -27,4 +27,7 @@ export class AppComponent {
   }
 
   constructor(private userService: UserService) {}
+  logout() {
+    this.userService.logout();
+  }
 }

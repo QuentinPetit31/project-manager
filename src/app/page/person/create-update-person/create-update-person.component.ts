@@ -15,6 +15,7 @@ import { PersonService } from '../../../services/person.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { Job } from '../../../services/job';
+import { MatIconModule } from '@angular/material/icon';
 
 /**
  * @title Basic Inputs
@@ -32,6 +33,7 @@ import { Job } from '../../../services/job';
     ReactiveFormsModule,
     CommonModule,
     MatSelectModule,
+    MatIconModule,
   ],
 })
 export class CreateUpdatePersonComponent implements OnInit {

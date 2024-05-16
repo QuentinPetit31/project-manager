@@ -19,6 +19,7 @@ import {
 } from '@angular/material/core';
 import { JobService } from '../../../services/job.service';
 import { Job } from '../../../services/job';
+import { MatIconModule } from '@angular/material/icon';
 
 /**
  * @title Basic Inputs
@@ -41,6 +42,7 @@ import { Job } from '../../../services/job';
     CommonModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatIconModule,
   ],
 })
 export class CreateUpdateJobComponent implements OnInit {

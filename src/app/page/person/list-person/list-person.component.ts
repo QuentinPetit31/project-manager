@@ -5,11 +5,18 @@ import { PersonService } from '../../../services/person.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { Person } from '../../../services/person';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-person',
   standalone: true,
-  imports: [RouterModule, MatButtonModule, CommonModule, MatTableModule],
+  imports: [
+    RouterModule,
+    MatButtonModule,
+    CommonModule,
+    MatTableModule,
+    MatIconModule,
+  ],
   templateUrl: './list-person.component.html',
 })
 export class PersonListComponent {

@@ -5,11 +5,18 @@ import { ProjectService } from '../../../services/project.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-detail-project',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, RouterModule, MatTableModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    RouterModule,
+    MatTableModule,
+    MatIconModule,
+  ],
   templateUrl: './detail-project.component.html',
 })
 export class DetailProjectComponent implements OnInit {

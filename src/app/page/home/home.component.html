@@ -1,12 +1,16 @@
-<link rel="icon" type="image/x-icon" href="favicon.ico" />
 <h1>
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <span class="material-symbols-outlined"> home_pin </span>Home
+  <mat-icon>house</mat-icon>
+  Home
 </h1>
-<div class="h-48 grid grid-cols-3 gap-10">
-  <a routerLink="/exercise" mat-button>Exercise</a>
-  <a routerLink="/person" mat-button>Person</a>
-  <a routerLink="/job" mat-button>Job</a>
+<div class="grid grid-cols-1 gap-10 lg:grid-cols-3">
+  <a routerLink="/project" mat-button>
+    <mat-icon>table_view</mat-icon>Project</a
+  >
+  <a routerLink="/person" mat-button>
+    <mat-icon>settings_account_box</mat-icon> Person</a
+  >
+  <a routerLink="/job" mat-button> <mat-icon>work</mat-icon> Job</a>
+  <a routerLink="/exercise" mat-button
+    ><mat-icon>border_color</mat-icon>Exercise</a
+  >
 </div>

@@ -4,11 +4,18 @@ import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { Job } from '../../../services/job';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-project',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatTableModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './list-job.component.html',
 })
 export class JobListComponent implements OnInit {
