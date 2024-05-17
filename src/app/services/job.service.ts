@@ -29,7 +29,6 @@ export class JobService {
 
   delete(id: number) {
     console.log('delete');
-
     return this.httpClient.delete<void>('http://localhost:3000/jobs/' + id);
   }
 

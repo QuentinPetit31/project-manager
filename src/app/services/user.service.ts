@@ -7,7 +7,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  password: string;
+  // password: string;
 }
 
 export interface CreateUser {
@@ -60,21 +60,17 @@ export class UserService {
   // if yes, you store the user and return true
   // if no, return false
   // return to the user a response (connection ok or not)
-  login(userLogin: { email: string; password: string }): boolean {
-    // soit faire :
-    const foundUser = this.users.find(
-      user =>
-        user.email === userLogin.email && userLogin.password === user.password
+  login(body: { email: string | null; password: string | null }) {
+    return this.httpClient.post<User>(
+      'http://localhost:3000/users/login',
+      body
     );
-    if (foundUser) {
-      this.user = foundUser;
-      console.log("l'utilisateur existe");
-      return true;
-    } else {
-      console.log('Les éléments renseignés ne sont pas correctes');
-      return false;
-    }
   }
+
+  setUser(user: User) {
+    this.user = user;
+  }
+
   logout() {
     this.user = null;
     this.router.navigate(['/login']);

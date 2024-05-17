@@ -1,4 +1,28 @@
-<header class="w-full bg-slate-200 h-14 flex justify-center items-center">
+<header class="w-full bg-slate-200 h-14 flex justify-between items-center">
+  <button mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <a routerLink="/project" mat-button>
+        <mat-icon>table_view</mat-icon>Project</a
+      >
+    </button>
+    <button mat-menu-item>
+      <a routerLink="/person" mat-button>
+        <mat-icon>settings_account_box</mat-icon> Person</a
+      >
+    </button>
+    <button mat-menu-item>
+      <a routerLink="/job" mat-button> <mat-icon>work</mat-icon> Job</a>
+    </button>
+    <button mat-menu-item>
+      <a routerLink="/exercise" mat-button
+        ><mat-icon>border_color</mat-icon>Exercise</a
+      >
+    </button>
+  </mat-menu>
+
   <a routerLink="" mat-button>
     <img
       src="assets/project manager.png"

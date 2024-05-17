@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { User, UserService } from './services/user.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatTableModule,
     MatIconModule,
+    MatMenuModule,
   ],
   templateUrl: './app.component.html',
 })

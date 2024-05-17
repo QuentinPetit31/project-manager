@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { User, UserService } from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 
@@ -52,24 +52,32 @@ export class LoginComponent {
     userService.refresh();
   }
 
+  //initialisation de la fonction login
   login() {
     // if form valide
     if (this.form.valid) {
       // récupère la valeur du form
-      const formValue = this.form.getRawValue() as User;
-      console.log('formValue = ', formValue);
+      const formValue = this.form.getRawValue();
 
       // Appel de la méthode login du service UserService avec les informations du formulaire
-      const loginSuccess = this.userService.login(formValue);
-      console.log('loginSuccess', loginSuccess);
-      // si ok redirection homepage
-      if (loginSuccess) {
-        this.router.navigate(['']);
-        // <a routerLink="/login" mat-button>this.userService.login(formValue)</a>
-      } else {
-        //si erreur message sous bouton
-        this.asError = true;
-      }
+      // importer l'userService dans le constructor juste au dessus
+      this.userService
+        .login({
+          email: formValue.email,
+          password: formValue.password,
+        })
+        // le suscribe sert a recevoir la reponse de l'observable
+        .subscribe(user => {
+          // si on a un user alors il est stocké puis on le redirige vers home
+          if (user) {
+            this.userService.setUser(user);
+            // route vide donc vers homepage
+            this.router.navigate(['']);
+          } else {
+            //si erreur message sous bouton
+            this.asError = true;
+          }
+        });
     }
   }
 
