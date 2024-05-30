@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
 
 export interface User {
   id: string;
@@ -20,7 +19,6 @@ export interface CreateUser {
   providedIn: 'root',
 })
 export class UserService {
-  private users: User[] = [];
   private user: User | null = null;
 
   constructor(
@@ -28,28 +26,22 @@ export class UserService {
     private router: Router
   ) {}
 
-  refresh(): void {
-    console.log('refreshUsers');
-
-    this.httpClient
-      .get<User[]>('http://localhost:3000/users')
-      .subscribe(users => {
-        console.log('refreshProjects users  =>', users);
-        this.users = users;
-      });
-  }
-
-  create(newUser: CreateUser) {
-    return this.httpClient
-      .post<boolean>('http://localhost:3000/users', newUser)
-      .pipe(tap(() => this.refresh()));
-  }
-
   /**
    * return current logged user
    */
   getUser(): User | null {
     return this.user;
+  }
+
+  setUser(user: User) {
+    this.user = user;
+  }
+
+  create(newUser: CreateUser) {
+    return this.httpClient.post<boolean>(
+      'http://localhost:3000/users',
+      newUser
+    );
   }
 
   /**
@@ -65,10 +57,6 @@ export class UserService {
       'http://localhost:3000/users/login',
       body
     );
-  }
-
-  setUser(user: User) {
-    this.user = user;
   }
 
   logout() {

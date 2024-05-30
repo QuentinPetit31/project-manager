@@ -30,37 +30,28 @@ import { Router, RouterModule } from '@angular/router';
 export class LoginComponent {
   form = new FormGroup({
     email: new FormControl<string>('quentin@mail.com', [
+      // besoin d'avoir le format d'un mail et que le champ soit rempli
       Validators.required,
       Validators.email,
     ]),
-    // email: new FormControl<string>('', [Validators.required, Validators.email]),
     password: new FormControl<string>('123azerty', [
       Validators.required,
       Validators.minLength(8),
     ]),
-    // password: new FormControl<string>('', [
-    //   Validators.required,
-    //   Validators.minLength(8),
-    // ]),
   });
   asError = false;
 
   constructor(
     private userService: UserService,
     private router: Router
-  ) {
-    userService.refresh();
-  }
+  ) {}
 
-  //initialisation de la fonction login
   login() {
     // if form valide
     if (this.form.valid) {
       // récupère la valeur du form
       const formValue = this.form.getRawValue();
 
-      // Appel de la méthode login du service UserService avec les informations du formulaire
-      // importer l'userService dans le constructor juste au dessus
       this.userService
         .login({
           email: formValue.email,

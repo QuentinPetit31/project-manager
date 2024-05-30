@@ -493,26 +493,23 @@ Bonus : afficher dans les prompts (le numéro de l'utilisateur que vous ajoutez)
       whoCanGoToCinema(personnesAndBudget)
     );
 
-    // Il faut un minimum de 20 euro de budget et 18 ans pour aller au strip club, qui peut y aller ? Sortir un tableau de prenom
+    // Il faut un minimum de 20 euro de budget et 18 ans pour aller au bar, qui peut y aller ? Sortir un tableau de prenom
 
-    function whoCanGoToStripClub(
+    function whoCanGoToBar(
       personnesAndBudget: { prenom: string; age: number; budget: number }[]
     ): string[] {
-      let canGoToStripClub: string[] = [];
+      let canGoToBar: string[] = [];
       for (let i = 0; i < personnesAndBudget.length; i++) {
         if (
           personnesAndBudget[i].budget >= 20 &&
           personnesAndBudget[i].age >= 18
         ) {
-          canGoToStripClub.push(personnesAndBudget[i].prenom);
+          canGoToBar.push(personnesAndBudget[i].prenom);
         }
       }
-      return canGoToStripClub;
+      return canGoToBar;
     }
-    console.log(
-      'peuvent aller au strip club ->',
-      whoCanGoToStripClub(personnesAndBudget)
-    );
+    console.log('peuvent aller au bar ->', whoCanGoToBar(personnesAndBudget));
 
     // // Il faut un maximum de 20 euro de budget et 18 ans pour recevoir la caf, qui peut y aller ? Sortir un tableau de prenom
     function whoCanGoToCaf(

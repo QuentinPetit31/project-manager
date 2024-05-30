@@ -36,20 +36,23 @@ export const routes: Routes = [
   {
     path: 'project/create',
     component: CreateUpdateProjectComponent,
+    canActivate: [AuthGuard],
     resolve: { persons: personsResolver },
-  }, // , canActivate: [AuthGuard]
+  },
 
   {
     path: 'project/:id',
     component: DetailProjectComponent,
+    canActivate: [AuthGuard],
     resolve: { project: projectResolver },
-  }, // , canActivate: [AuthGuard]
+  },
 
   {
     path: 'project/:id/update',
     component: CreateUpdateProjectComponent,
-    resolve: { project: projectResolver, persons: personsResolver }, //persons: personsResolver
-  }, // , canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    resolve: { project: projectResolver, persons: personsResolver },
+  },
 
   {
     path: 'person',
@@ -60,38 +63,47 @@ export const routes: Routes = [
   {
     path: 'person/create',
     component: CreateUpdatePersonComponent,
+    canActivate: [AuthGuard],
     resolve: { jobs: jobsResolver },
-  }, // , canActivate: [AuthGuard]
+  },
 
   {
     path: 'person/:id',
     component: DetailPersonComponent,
+    canActivate: [AuthGuard],
     resolve: { person: personResolver },
-  }, // , canActivate: [AuthGuard]
+  },
 
   {
     path: 'person/:id/update',
     component: CreateUpdatePersonComponent,
+    canActivate: [AuthGuard],
     resolve: { person: personResolver, jobs: jobsResolver },
-  }, // , canActivate: [AuthGuard]
+  },
 
   {
     path: 'job',
     component: JobListComponent,
+    canActivate: [AuthGuard],
     resolve: { jobs: jobsResolver },
+  },
+  {
+    path: 'job/create',
+    component: CreateUpdateJobComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'job/create', component: CreateUpdateJobComponent }, // , canActivate: [AuthGuard]
   {
     path: 'job/:id',
     component: DetailJobComponent,
+    canActivate: [AuthGuard],
     resolve: { job: jobResolver },
-  }, // , canActivate: [AuthGuard]
+  },
   {
     path: 'job/:id/update',
     component: CreateUpdateJobComponent,
+    canActivate: [AuthGuard],
     resolve: { job: jobResolver },
-  }, // , canActivate: [AuthGuard]
+  },
 
   { path: '**', redirectTo: '' },
 ];
