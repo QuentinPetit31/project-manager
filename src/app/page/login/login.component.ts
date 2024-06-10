@@ -29,12 +29,12 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class LoginComponent {
   form = new FormGroup({
-    email: new FormControl<string>('quentin@mail.com', [
+    email: new FormControl<string>('', [
       // besoin d'avoir le format d'un mail et que le champ soit rempli
       Validators.required,
       Validators.email,
     ]),
-    password: new FormControl<string>('123azerty', [
+    password: new FormControl<string>('', [
       Validators.required,
       Validators.minLength(8),
     ]),
